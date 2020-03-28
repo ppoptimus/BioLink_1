@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -47,10 +48,12 @@
             this.btnExportCSV = new MetroFramework.Controls.MetroButton();
             this.btnExportText = new MetroFramework.Controls.MetroButton();
             this.cbxEvent = new MetroFramework.Controls.MetroComboBox();
+            this.devicesStuffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbxDevices = new MetroFramework.Controls.MetroComboBox();
             this.cbxUsers = new MetroFramework.Controls.MetroComboBox();
             this.cbxUserGroup = new MetroFramework.Controls.MetroComboBox();
             this.gvViewData = new MetroFramework.Controls.MetroGrid();
+            ((System.ComponentModel.ISupportInitialize)(this.devicesStuffBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvViewData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +77,8 @@
             // dtpBeginDate
             // 
             this.dtpBeginDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpBeginDate.CalendarForeColor = System.Drawing.SystemColors.WindowText;
+            this.dtpBeginDate.CalendarTrailingForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dtpBeginDate.FontSize = MetroFramework.MetroDateTimeSize.Tall;
             this.dtpBeginDate.FontWeight = MetroFramework.MetroDateTimeWeight.Bold;
             this.dtpBeginDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -82,11 +87,15 @@
             this.dtpBeginDate.Name = "dtpBeginDate";
             this.dtpBeginDate.Size = new System.Drawing.Size(206, 35);
             this.dtpBeginDate.TabIndex = 2;
+            this.dtpBeginDate.UseCustomBackColor = true;
+            this.dtpBeginDate.UseCustomForeColor = true;
+            this.dtpBeginDate.UseStyleColors = true;
             this.dtpBeginDate.ValueChanged += new System.EventHandler(this.metroDateTime1_ValueChanged);
             // 
             // dtpEndDate
             // 
             this.dtpEndDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEndDate.CalendarTrailingForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dtpEndDate.FontSize = MetroFramework.MetroDateTimeSize.Tall;
             this.dtpEndDate.FontWeight = MetroFramework.MetroDateTimeWeight.Bold;
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -95,6 +104,9 @@
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(206, 35);
             this.dtpEndDate.TabIndex = 2;
+            this.dtpEndDate.UseCustomBackColor = true;
+            this.dtpEndDate.UseCustomForeColor = true;
+            this.dtpEndDate.UseStyleColors = true;
             this.dtpEndDate.ValueChanged += new System.EventHandler(this.metroDateTime1_ValueChanged);
             // 
             // metroLabel1
@@ -284,28 +296,26 @@
             this.cbxEvent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.cbxEvent.FormattingEnabled = true;
             this.cbxEvent.ItemHeight = 29;
-            this.cbxEvent.Items.AddRange(new object[] {
-            "09:00"});
             this.cbxEvent.Location = new System.Drawing.Point(28, 166);
             this.cbxEvent.Name = "cbxEvent";
-            this.cbxEvent.PromptText = "00:00";
             this.cbxEvent.Size = new System.Drawing.Size(206, 35);
             this.cbxEvent.TabIndex = 0;
             this.cbxEvent.UseSelectable = true;
+            // 
+            // devicesStuffBindingSource
+            // 
+            this.devicesStuffBindingSource.DataSource = typeof(BioLink_1.Stuff.DevicesStuff);
             // 
             // cbxDevices
             // 
             this.cbxDevices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxDevices.FontSize = MetroFramework.MetroComboBoxSize.Tall;
             this.cbxDevices.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
-            this.cbxDevices.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbxDevices.ForeColor = System.Drawing.Color.Black;
             this.cbxDevices.FormattingEnabled = true;
             this.cbxDevices.ItemHeight = 29;
-            this.cbxDevices.Items.AddRange(new object[] {
-            "09:00"});
             this.cbxDevices.Location = new System.Drawing.Point(271, 166);
             this.cbxDevices.Name = "cbxDevices";
-            this.cbxDevices.PromptText = "00:00";
             this.cbxDevices.Size = new System.Drawing.Size(275, 35);
             this.cbxDevices.TabIndex = 0;
             this.cbxDevices.UseSelectable = true;
@@ -318,11 +328,8 @@
             this.cbxUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.cbxUsers.FormattingEnabled = true;
             this.cbxUsers.ItemHeight = 29;
-            this.cbxUsers.Items.AddRange(new object[] {
-            "09:00"});
             this.cbxUsers.Location = new System.Drawing.Point(815, 166);
             this.cbxUsers.Name = "cbxUsers";
-            this.cbxUsers.PromptText = "00:00";
             this.cbxUsers.Size = new System.Drawing.Size(186, 35);
             this.cbxUsers.TabIndex = 0;
             this.cbxUsers.UseSelectable = true;
@@ -335,11 +342,8 @@
             this.cbxUserGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.cbxUserGroup.FormattingEnabled = true;
             this.cbxUserGroup.ItemHeight = 29;
-            this.cbxUserGroup.Items.AddRange(new object[] {
-            "09:00"});
             this.cbxUserGroup.Location = new System.Drawing.Point(587, 166);
             this.cbxUserGroup.Name = "cbxUserGroup";
-            this.cbxUserGroup.PromptText = "00:00";
             this.cbxUserGroup.Size = new System.Drawing.Size(186, 35);
             this.cbxUserGroup.TabIndex = 0;
             this.cbxUserGroup.UseSelectable = true;
@@ -419,6 +423,7 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Name = "UC_ManualExport";
             this.Size = new System.Drawing.Size(1280, 768);
+            ((System.ComponentModel.ISupportInitialize)(this.devicesStuffBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvViewData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -447,5 +452,6 @@
         private MetroFramework.Controls.MetroComboBox cbxUsers;
         private MetroFramework.Controls.MetroComboBox cbxUserGroup;
         private MetroFramework.Controls.MetroGrid gvViewData;
+        private System.Windows.Forms.BindingSource devicesStuffBindingSource;
     }
 }

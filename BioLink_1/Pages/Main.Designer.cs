@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MainExport_Menu = new System.Windows.Forms.ToolStripMenuItem();
             this.ManualExport_SubMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,7 @@
             this.MainExport_Menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ManualExport_SubMenu});
             this.MainExport_Menu.Name = "MainExport_Menu";
-            this.MainExport_Menu.Size = new System.Drawing.Size(110, 27);
+            this.MainExport_Menu.Size = new System.Drawing.Size(128, 36);
             this.MainExport_Menu.Text = "Export File";
             this.MainExport_Menu.Click += new System.EventHandler(this.MainExport_Menu_Click);
             // 
@@ -61,7 +62,7 @@
             // 
             this.ManualExport_SubMenu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.ManualExport_SubMenu.Name = "ManualExport_SubMenu";
-            this.ManualExport_SubMenu.Size = new System.Drawing.Size(224, 26);
+            this.ManualExport_SubMenu.Size = new System.Drawing.Size(197, 26);
             this.ManualExport_SubMenu.Text = "Manual Export";
             this.ManualExport_SubMenu.Click += new System.EventHandler(this.ManualExport_SubMenu_Click);
             // 
@@ -86,6 +87,7 @@
             this.ClientSize = new System.Drawing.Size(1319, 901);
             this.Controls.Add(this.mt_pl);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
             this.Resizable = false;
