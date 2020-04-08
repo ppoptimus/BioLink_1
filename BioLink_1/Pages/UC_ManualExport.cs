@@ -23,13 +23,14 @@ namespace BioLink_1.Pages
         {
             DevicesStuff devicesStuffs = new DevicesStuff();
             Devices devices = new Devices();
+            ComboBox comboBox = new ComboBox();
+            comboBox.DataSource = devicesStuffs.Devices;
 
+            foreach(var item in devicesStuffs.Devices.Select(x => x.DevicesName))
+            {
+                cbxDevices.Items.Add(item);
+            }
 
-            ComboboxItem item = new ComboboxItem();
-            item.Text = devicesStuffs.GetDevices.DevicesName;
-            item.Value = devicesStuffs.GetDevices.DevicesId;
-            cbxDevices.Items.Add(item);
-            cbxDevices.SelectedIndex = 0;
         }
 
         private void metroDateTime1_ValueChanged(object sender, EventArgs e)
@@ -37,5 +38,9 @@ namespace BioLink_1.Pages
 
         }
 
+        private void cbxDevices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var test = cbxDevices.SelectedItem;
+        }
     }
 }

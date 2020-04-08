@@ -5,11 +5,14 @@ namespace BioLink_1.Stuff
 {
     public class DevicesStuff
     {
-        public Devices GetDevices = new Devices();
         public DevicesStuff()
         {
-            GetDevices.DevicesId = "1";
-            GetDevices.DevicesName = "Name";
         }
+        public List<Devices> Devices = new List<Devices>
+        {
+            new Devices{DevicesId = "1", DevicesName = "test1"},
+            new Devices{DevicesId = "2", DevicesName = "test2"},
+            new Devices{DevicesId = "3", DevicesName = "test3"}
+        };
     }
 }

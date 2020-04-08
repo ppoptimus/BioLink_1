@@ -319,6 +319,7 @@
             this.cbxDevices.Size = new System.Drawing.Size(275, 35);
             this.cbxDevices.TabIndex = 0;
             this.cbxDevices.UseSelectable = true;
+            this.cbxDevices.SelectedIndexChanged += new System.EventHandler(this.cbxDevices_SelectedIndexChanged);
             // 
             // cbxUsers
             // 
