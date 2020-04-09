@@ -1,14 +1,15 @@
-﻿using System;
+﻿using BioLink_1.Models;
+using BioLink_1.Stuff;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using BioLink_1.Stuff;
-using BioLink_1.Models;
 
 namespace BioLink_1.Pages
 {
@@ -41,6 +42,29 @@ namespace BioLink_1.Pages
         private void cbxDevices_SelectedIndexChanged(object sender, EventArgs e)
         {
             var test = cbxDevices.SelectedItem;
+        }
+
+        private void btnViewData_Click(object sender, EventArgs e)
+        {
+            PopulateDataGridView();
+        }
+
+        private void PopulateDataGridView()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8080/");
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.GetAsync("api/GetData/GetTextFile").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var users = response.Content.ReadAsAsync<IEnumerable<t_text_file>>().Result;
+                gvViewData.DataSource = users;
+
+            }
         }
     }
 }

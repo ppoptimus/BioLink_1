@@ -48,13 +48,13 @@
             this.btnExportCSV = new MetroFramework.Controls.MetroButton();
             this.btnExportText = new MetroFramework.Controls.MetroButton();
             this.cbxEvent = new MetroFramework.Controls.MetroComboBox();
-            this.devicesStuffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbxDevices = new MetroFramework.Controls.MetroComboBox();
             this.cbxUsers = new MetroFramework.Controls.MetroComboBox();
             this.cbxUserGroup = new MetroFramework.Controls.MetroComboBox();
             this.gvViewData = new MetroFramework.Controls.MetroGrid();
-            ((System.ComponentModel.ISupportInitialize)(this.devicesStuffBindingSource)).BeginInit();
+            this.devicesStuffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gvViewData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.devicesStuffBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxBeginTime
@@ -259,6 +259,7 @@
             this.btnViewData.UseCustomForeColor = true;
             this.btnViewData.UseSelectable = true;
             this.btnViewData.UseStyleColors = true;
+            this.btnViewData.Click += new System.EventHandler(this.btnViewData_Click);
             // 
             // btnExportCSV
             // 
@@ -301,10 +302,6 @@
             this.cbxEvent.Size = new System.Drawing.Size(206, 35);
             this.cbxEvent.TabIndex = 0;
             this.cbxEvent.UseSelectable = true;
-            // 
-            // devicesStuffBindingSource
-            // 
-            this.devicesStuffBindingSource.DataSource = typeof(BioLink_1.Stuff.DevicesStuff);
             // 
             // cbxDevices
             // 
@@ -373,7 +370,6 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gvViewData.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gvViewData.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gvViewData.EnableHeadersVisualStyles = false;
             this.gvViewData.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gvViewData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -392,8 +388,12 @@
             this.gvViewData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gvViewData.RowTemplate.Height = 24;
             this.gvViewData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvViewData.Size = new System.Drawing.Size(1280, 423);
+            this.gvViewData.Size = new System.Drawing.Size(722, 208);
             this.gvViewData.TabIndex = 8;
+            // 
+            // devicesStuffBindingSource
+            // 
+            this.devicesStuffBindingSource.DataSource = typeof(BioLink_1.Stuff.DevicesStuff);
             // 
             // UC_ManualExport
             // 
@@ -424,8 +424,8 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Name = "UC_ManualExport";
             this.Size = new System.Drawing.Size(1280, 768);
-            ((System.ComponentModel.ISupportInitialize)(this.devicesStuffBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvViewData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.devicesStuffBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
