@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BioLinkTaskSchedule", "BioLink_1\BioLinkTaskSchedule.csproj", "{2154D591-FF79-4344-90DE-CF78BCB0FE80}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biolink_Api", "Biolink_Api\Biolink_Api.csproj", "{4C1D3EBE-920A-4486-AF4B-5EB8DF9CA272}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskExport", "TaskExport\TaskExport.csproj", "{CD04B3AD-64BB-4C88-8B14-BAD2609067B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BioLinkTaskSchedule", "BioLinkTaskSchedule\BioLinkTaskSchedule.csproj", "{2154D591-FF79-4344-90DE-CF78BCB0FE80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C1D3EBE-920A-4486-AF4B-5EB8DF9CA272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C1D3EBE-920A-4486-AF4B-5EB8DF9CA272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1D3EBE-920A-4486-AF4B-5EB8DF9CA272}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{CD04B3AD-64BB-4C88-8B14-BAD2609067B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD04B3AD-64BB-4C88-8B14-BAD2609067B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD04B3AD-64BB-4C88-8B14-BAD2609067B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2154D591-FF79-4344-90DE-CF78BCB0FE80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

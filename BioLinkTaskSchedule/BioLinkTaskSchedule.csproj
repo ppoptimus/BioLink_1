@@ -9,8 +9,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2154D591-FF79-4344-90DE-CF78BCB0FE80}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>BioLink_1</RootNamespace>
-    <AssemblyName>BioLink_1</AssemblyName>
+    <RootNamespace>BioLinkTaskSchedule</RootNamespace>
+    <AssemblyName>BioLinkTaskSchedule</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -69,27 +69,18 @@
   <ItemGroup>
     <Compile Include="Models\Devices.cs" />
     <Compile Include="Models\t_text_file.cs" />
-    <Compile Include="Pages\Main.cs">
+    <Compile Include="Pages\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pages\Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\UC_ManualExport.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pages\UC_ManualExport.Designer.cs">
-      <DependentUpon>UC_ManualExport.cs</DependentUpon>
+    <Compile Include="Pages\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stuff\ComboboxItem.cs" />
     <Compile Include="Stuff\DevicesStuff.cs" />
-    <EmbeddedResource Include="Pages\Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\UC_ManualExport.resx">
-      <DependentUpon>UC_ManualExport.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
