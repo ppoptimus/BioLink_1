@@ -1,4 +1,4 @@
-﻿namespace BioLink_1.Models
+﻿namespace BioLinkTaskSchedule.Models
 {
     public class Devices
     {

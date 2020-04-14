@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BioLink_1.Models
+namespace BioLinkTaskSchedule.Models
 {
     public class t_text_file
     {

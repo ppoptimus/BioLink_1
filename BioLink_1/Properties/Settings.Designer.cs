@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BioLink_1.Properties
+namespace BioLinkTaskSchedule.Properties
 {
 
 

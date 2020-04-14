@@ -1,11 +1,11 @@
-﻿using BioLink_1.Pages;
+﻿using BioLinkTaskSchedule.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BioLink_1
+namespace BioLinkTaskSchedule
 {
     static class Program
     {

@@ -1,5 +1,5 @@
-﻿using BioLink_1.Models;
-using BioLink_1.Stuff;
+﻿using BioLinkTaskSchedule.Models;
+using BioLinkTaskSchedule.Stuff;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
-namespace BioLink_1.Pages
+namespace BioLinkTaskSchedule.Pages
 {
     public partial class UC_ManualExport : UserControl
     {

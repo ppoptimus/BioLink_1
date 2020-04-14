@@ -1,4 +1,4 @@
-﻿namespace BioLink_1.Pages
+﻿namespace BioLinkTaskSchedule.Pages
 {
     partial class UC_ManualExport
     {
@@ -393,7 +393,7 @@
             // 
             // devicesStuffBindingSource
             // 
-            this.devicesStuffBindingSource.DataSource = typeof(BioLink_1.Stuff.DevicesStuff);
+            this.devicesStuffBindingSource.DataSource = typeof(BioLinkTaskSchedule.Stuff.DevicesStuff);
             // 
             // UC_ManualExport
             // 

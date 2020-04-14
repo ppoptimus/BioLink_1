@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BioLink_1.Stuff
+namespace BioLinkTaskSchedule.Stuff
 {
     public class ComboboxItem
     {

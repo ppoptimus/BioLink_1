@@ -1,4 +1,4 @@
-﻿namespace BioLink_1.Pages
+﻿namespace BioLinkTaskSchedule.Pages
 {
     public partial class Main : MetroFramework.Forms.MetroForm
     {

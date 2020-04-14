@@ -1,7 +1,7 @@
-﻿using BioLink_1.Models;
+﻿using BioLinkTaskSchedule.Models;
 using System.Collections.Generic;
 
-namespace BioLink_1.Stuff
+namespace BioLinkTaskSchedule.Stuff
 {
     public class DevicesStuff
     {
