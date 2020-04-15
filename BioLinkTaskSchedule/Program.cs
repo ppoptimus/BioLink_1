@@ -1,4 +1,4 @@
-﻿using BioLinkTaskSchedule.Pages;
+﻿using BioLinkTaskSchedule.Forms;
 using System;
 using System.Windows.Forms;
 
