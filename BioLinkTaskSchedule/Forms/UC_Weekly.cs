@@ -10,19 +10,21 @@ using System.Windows.Forms;
 
 namespace BioLinkTaskSchedule.Forms
 {
-    public partial class UC_ConfigPath : UserControl
+    public partial class UC_Weekly : UserControl
     {
-        private static UC_ConfigPath _instance;
-        public static UC_ConfigPath Instance
+        public static UC_Weekly _instance;
+        public static UC_Weekly instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new UC_ConfigPath();
+                {
+                    _instance = new UC_Weekly();
+                }
                 return _instance;
             }
         }
-        public UC_ConfigPath()
+        public UC_Weekly()
         {
             InitializeComponent();
         }

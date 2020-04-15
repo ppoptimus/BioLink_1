@@ -73,11 +73,17 @@
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UC_ConfigPath.cs">
+    <Compile Include="Forms\UC_Daily.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UC_ConfigPath.Designer.cs">
-      <DependentUpon>UC_ConfigPath.cs</DependentUpon>
+    <Compile Include="Forms\UC_Daily.Designer.cs">
+      <DependentUpon>UC_Daily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UC_Weekly.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UC_Weekly.Designer.cs">
+      <DependentUpon>UC_Weekly.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Devices.cs" />
     <Compile Include="Models\t_text_file.cs" />
@@ -88,8 +94,11 @@
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UC_ConfigPath.resx">
-      <DependentUpon>UC_ConfigPath.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UC_Daily.resx">
+      <DependentUpon>UC_Daily.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UC_Weekly.resx">
+      <DependentUpon>UC_Weekly.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
