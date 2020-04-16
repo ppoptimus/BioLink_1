@@ -3,18 +3,14 @@ using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace BioLinkTaskSchedule.Forms
 {
     public partial class frmMain : MetroForm
     {
-        private List<t_text_file> T_Text_File;
         public frmMain()
         {
             InitializeComponent();
@@ -27,26 +23,49 @@ namespace BioLinkTaskSchedule.Forms
 
         private void btnBrowse_Click(object sender, System.EventArgs e)
         {
-            ConfigPath(SavePathFile());
-            T_Text_File = text_File();
+            SetPathFile();
+            txtPath.Enabled = true;
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPath.Text))
+            {
+                string message = "Are you sure that you would like save file to this path?";
+                string title = "Confirmation";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    ConfigPath(txtPath.Text);
+                    MessageBox.Show("Set path successful", "Message", MessageBoxButtons.OK);
+                    txtPath.Clear();
+                    txtPath.Enabled = false;
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Path name shouldn't emty", "Warning!", MessageBoxButtons.OK);
+                txtPath.Focus();
+            }
+            
         }
 
         /// <summary>
-        /// Open windows dialog for choose path save file
+        /// Open windows dialog to choose path for save file
         /// </summary>
         /// <returns>Path FileName</returns>
-        private string SavePathFile()
+        private string SetPathFile()
         {
-            Stream myStream;
             var path = "";
             sdPath.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (sdPath.ShowDialog() == DialogResult.OK)
             {
                 path = sdPath.FileName;
-                if ((myStream = sdPath.OpenFile()) != null)
-                {
-                    myStream.Close();
-                }
             }
             txtPath.Text = path;
             return path;
@@ -56,28 +75,26 @@ namespace BioLinkTaskSchedule.Forms
         /// Write text file 
         /// </summary>
         /// <param name="path"></param>
-        private void ConfigPath(string path)
+        private void ConfigPath(string textWrite)
         {
+            string startupPath = @"C:\BioLink\PathConfig.txt";
             try
             {
-                FileInfo fi = new FileInfo(path);
+                //FilePath//
+                FileInfo fi = new FileInfo(startupPath);
                 fi.Delete();
-                if (!File.Exists(path))
+                if (!File.Exists(startupPath))
                 {
-                    using (StreamWriter sw = File.CreateText(path))
+                    using (StreamWriter sw = File.CreateText(startupPath))
                     {
-                        sw.WriteLine("Hello");
-                        sw.WriteLine("And");
-                        sw.WriteLine("Welcome");
+                        sw.WriteLine(textWrite);
                     }
                 }
             }
             catch (System.Exception)
             {
-
                 return;
             }
-            
         }
 
         private List<t_text_file> text_File()
@@ -101,55 +118,57 @@ namespace BioLinkTaskSchedule.Forms
             }
         }
 
-        private void cbxTaskStart_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (cbxTaskStart.SelectedItem.ToString())
-            {
-                case "Daily":
-                    GetUC_Daily();
-                    break;
-                case "Weekly":
-                    GetUC_Weekly();
-                    break;
-                case "Monthly":
+       
 
-                    break;
-                case "OneTime":
+        //private void cbxTaskStart_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    switch (cbxTaskStart.SelectedItem.ToString())
+        //    {
+        //        case "Daily":
+        //            GetUC_Daily();
+        //            break;
+        //        case "Weekly":
+        //            GetUC_Weekly();
+        //            break;
+        //        case "Monthly":
 
-                    break;
-                default:
-                    break;
-            }
-            
-            
-        }
+        //            break;
+        //        case "OneTime":
 
-        private void GetUC_Daily()
-        {
-            if (!pnl.Controls.Contains(UC_Daily.instance))
-            {
-                pnl.Controls.Add(UC_Daily.instance);
-                UC_Daily.instance.Dock = DockStyle.Fill;
-                UC_Daily.instance.BringToFront();
-            }
-            else
-            {
-                UC_Daily.instance.BringToFront();
-            }
-        }
+        //            break;
+        //        default:
+        //            break;
+        //    }
 
-        private void GetUC_Weekly()
-        {
-            if (!pnl.Controls.Contains(UC_Weekly.instance))
-            {
-                pnl.Controls.Add(UC_Weekly.instance);
-                UC_Weekly.instance.Dock = DockStyle.Fill;
-                UC_Weekly.instance.BringToFront();
-            }
-            else
-            {
-                UC_Weekly.instance.BringToFront();
-            }
-        }
+
+        //}
+
+        //private void GetUC_Daily()
+        //{
+        //    if (!pnl.Controls.Contains(UC_Daily.instance))
+        //    {
+        //        pnl.Controls.Add(UC_Daily.instance);
+        //        UC_Daily.instance.Dock = DockStyle.Fill;
+        //        UC_Daily.instance.BringToFront();
+        //    }
+        //    else
+        //    {
+        //        UC_Daily.instance.BringToFront();
+        //    }
+        //}
+
+        //private void GetUC_Weekly()
+        //{
+        //    if (!pnl.Controls.Contains(UC_Weekly.instance))
+        //    {
+        //        pnl.Controls.Add(UC_Weekly.instance);
+        //        UC_Weekly.instance.Dock = DockStyle.Fill;
+        //        UC_Weekly.instance.BringToFront();
+        //    }
+        //    else
+        //    {
+        //        UC_Weekly.instance.BringToFront();
+        //    }
+        //}
     }
 }
