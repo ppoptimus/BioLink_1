@@ -80,7 +80,7 @@
             this.tabConfigPath.Name = "tabConfigPath";
             this.tabConfigPath.Size = new System.Drawing.Size(752, 244);
             this.tabConfigPath.TabIndex = 0;
-            this.tabConfigPath.Text = "Config Path";
+            this.tabConfigPath.Text = " Set Auto Export";
             this.tabConfigPath.VerticalScrollbarBarColor = true;
             this.tabConfigPath.VerticalScrollbarHighlightOnWheel = false;
             this.tabConfigPath.VerticalScrollbarSize = 10;

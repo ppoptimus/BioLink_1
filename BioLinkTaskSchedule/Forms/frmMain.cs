@@ -62,17 +62,29 @@ namespace BioLinkTaskSchedule.Forms
         private string SetPathFile()
         {
             var path = "";
-            sdPath.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            if (sdPath.ShowDialog() == DialogResult.OK)
+            //sdPath.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            //if (sdPath.ShowDialog() == DialogResult.OK)
+            //{
+            //    path = sdPath.FileName;
+            //}
+            //txtPath.Text = path;
+            //return path;
+
+            using (var fbd = new FolderBrowserDialog())
             {
-                path = sdPath.FileName;
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    path = fbd.SelectedPath;
+                }
             }
             txtPath.Text = path;
             return path;
         }
-       
+
         /// <summary>
-        /// Write text file 
+        /// Write textPathFile into PathConfig.txt
         /// </summary>
         /// <param name="path"></param>
         private void ConfigPath(string textWrite)
@@ -97,78 +109,6 @@ namespace BioLinkTaskSchedule.Forms
             }
         }
 
-        private List<t_text_file> text_File()
-        {
-            List<t_text_file> T_Text_File;
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8080/");
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-            HttpResponseMessage response = client.GetAsync("api/GetData/GetTextFile").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                T_Text_File = response.Content.ReadAsAsync<List<t_text_file>>().Result;
-                return T_Text_File;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-       
-
-        //private void cbxTaskStart_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    switch (cbxTaskStart.SelectedItem.ToString())
-        //    {
-        //        case "Daily":
-        //            GetUC_Daily();
-        //            break;
-        //        case "Weekly":
-        //            GetUC_Weekly();
-        //            break;
-        //        case "Monthly":
-
-        //            break;
-        //        case "OneTime":
-
-        //            break;
-        //        default:
-        //            break;
-        //    }
-
-
-        //}
-
-        //private void GetUC_Daily()
-        //{
-        //    if (!pnl.Controls.Contains(UC_Daily.instance))
-        //    {
-        //        pnl.Controls.Add(UC_Daily.instance);
-        //        UC_Daily.instance.Dock = DockStyle.Fill;
-        //        UC_Daily.instance.BringToFront();
-        //    }
-        //    else
-        //    {
-        //        UC_Daily.instance.BringToFront();
-        //    }
-        //}
-
-        //private void GetUC_Weekly()
-        //{
-        //    if (!pnl.Controls.Contains(UC_Weekly.instance))
-        //    {
-        //        pnl.Controls.Add(UC_Weekly.instance);
-        //        UC_Weekly.instance.Dock = DockStyle.Fill;
-        //        UC_Weekly.instance.BringToFront();
-        //    }
-        //    else
-        //    {
-        //        UC_Weekly.instance.BringToFront();
-        //    }
-        //}
     }
 }

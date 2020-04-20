@@ -23,6 +23,7 @@ namespace TaskExport
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8080/");
+            //client.BaseAddress = new Uri("https://localhost:44306/"); 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -42,11 +43,12 @@ namespace TaskExport
         {
             string sourceFilename = @"C:\BioLink\PathConfig.txt";
             string targetFilename = File.ReadLines(sourceFilename).First();
-            FileInfo fi = new FileInfo(targetFilename);
+            FileInfo fi = new FileInfo(targetFilename + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt");
+            
             fi.Delete();
-            if (!File.Exists(targetFilename))
+            if (!File.Exists(fi.ToString()))
             {
-                using (StreamWriter sw = File.CreateText(targetFilename))
+                using (StreamWriter sw = File.CreateText(fi.ToString()))
                 {
                     foreach(var item in text_File())
                     {
