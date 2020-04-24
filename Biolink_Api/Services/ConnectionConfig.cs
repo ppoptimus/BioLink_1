@@ -1,18 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
-using System.Linq;
-using System.Web;
 
 namespace Biolink_Api.Services
 {
     public class ConnectionConfig
     {
-        private string myCon = System.Configuration.ConfigurationManager.ConnectionStrings["ModelContext"].ConnectionString;
+        private string myCon = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectMariaDB"].ConnectionString;
         MySqlConnection conn;
-        DataTable dt;
 
         public ConnectionConfig()
         {
@@ -24,8 +20,6 @@ namespace Biolink_Api.Services
             try
             {
                 conn.Open();
-                var date = UnixTimeStampToDateTime(1580517767).ToString("yyyyMMdd");
-                
             }
             catch (MySqlException ex)
             {
@@ -33,28 +27,27 @@ namespace Biolink_Api.Services
             }
         }
 
-        public void ExportText(string sqlQuery)
+        public string ExportText()
         {
+            string json;
+            var getLastMonth = "202002"; //DateTime.Now.AddDays(-1).ToString("yyyyMM");
+            var getLastDay = "20200212"; //DateTime.Now.AddDays(-1).ToString("yyyyMMdd");
             try
             {
-                sqlQuery = @"select DEVDT, USRID from t_lg202002 
-                            where USRID is not null and USRID<> ''
+                var sqlQuery = @"select FROM_UNIXTIME(DEVDT, '%Y%m%d%H%i%S') as DEVDT, USRIDs from t_lg" + getLastMonth +
+                            @" where USRID is not null and USRID<> ''
                             and USRGRUID is not null
                             and EVT is not null
-                            and IMGLGUID is not null";
-                var cmd = new MySqlCommand(sqlQuery, conn);
-
-                MySqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-                }
-                rdr.Close();
+                            and IMGLGUID is not null
+                            and DATE_FORMAT(SRVDT, '%Y%m%d')  = '"+ getLastDay+"'";
+                var dt = Getdata(sqlQuery);
+                json = DataTableToJSONWithJSONNet(dt);
             }
             catch (Exception ex)
             {
-                throw ex;
+                return ex.Message;
             }
+            return json;
         }
 
         public DataTable Getdata(string sqlQuery)
@@ -66,12 +59,11 @@ namespace Biolink_Api.Services
             return table;
         }
 
-        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        public string DataTableToJSONWithJSONNet(DataTable table)
         {
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
+            string JSONString = string.Empty;
+            JSONString = JsonConvert.SerializeObject(table);
+            return JSONString;
         }
-
     }
 }
