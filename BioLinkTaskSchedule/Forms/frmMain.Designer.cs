@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.lblCloseForm = new System.Windows.Forms.Label();
             this.tabControl = new MetroFramework.Controls.MetroTabControl();
             this.tabConfigPath = new MetroFramework.Controls.MetroTabPage();
@@ -153,8 +154,10 @@
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.lblCloseForm);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Text = "Config Path";
             this.tabControl.ResumeLayout(false);
             this.tabConfigPath.ResumeLayout(false);
             this.tabConfigPath.PerformLayout();
