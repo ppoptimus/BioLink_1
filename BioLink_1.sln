@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biolink_Api", "Biolink_Api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskExport", "TaskExport\TaskExport.csproj", "{CD04B3AD-64BB-4C88-8B14-BAD2609067B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BioLinkTaskSchedule", "BioLinkTaskSchedule\BioLinkTaskSchedule.csproj", "{2154D591-FF79-4344-90DE-CF78BCB0FE80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BioLinkConfigPath", "BioLinkTaskSchedule\BioLinkConfigPath.csproj", "{2154D591-FF79-4344-90DE-CF78BCB0FE80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
