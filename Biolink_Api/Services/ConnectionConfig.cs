@@ -15,6 +15,9 @@ namespace Biolink_Api.Services
             conn = new MySqlConnection(myCon);
         }
 
+        /// <summary>
+        /// Open connection to MySql
+        /// </summary>
         public void ConnectMySql()
         {
             try
@@ -27,6 +30,10 @@ namespace Biolink_Api.Services
             }
         }
 
+        /// <summary>
+        /// Get text json from sql query
+        /// </summary>
+        /// <returns>String json</returns>
         public string ExportText()
         {
             string json;
@@ -34,7 +41,7 @@ namespace Biolink_Api.Services
             var getLastDay = "20200212"; //DateTime.Now.AddDays(-1).ToString("yyyyMMdd");
             try
             {
-                var sqlQuery = @"select FROM_UNIXTIME(DEVDT, '%Y%m%d%H%i%S') as DEVDT, USRIDs from t_lg" + getLastMonth +
+                var sqlQuery = @"select FROM_UNIXTIME(DEVDT, '%Y%m%d') as DEVDT, FROM_UNIXTIME(DEVDT, '%H%i%S') as TIME, USRID from t_lg" + getLastMonth +
                             @" where USRID is not null and USRID<> ''
                             and USRGRUID is not null
                             and EVT is not null
@@ -50,6 +57,11 @@ namespace Biolink_Api.Services
             return json;
         }
 
+        /// <summary>
+        /// Convert query string to DataTable
+        /// </summary>
+        /// <param name="sqlQuery"></param>
+        /// <returns>DataTable</returns>
         public DataTable Getdata(string sqlQuery)
         {
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
@@ -59,6 +71,11 @@ namespace Biolink_Api.Services
             return table;
         }
 
+        /// <summary>
+        /// Convert DataTable to Json
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns>String json</returns>
         public string DataTableToJSONWithJSONNet(DataTable table)
         {
             string JSONString = string.Empty;

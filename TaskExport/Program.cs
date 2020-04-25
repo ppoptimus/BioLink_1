@@ -21,13 +21,15 @@ namespace TaskExport
         {
             List<TestTextFile> T_Text_File;
 
+            string sourceUri = @"C:\BioLink\EndPointUri.txt";
+            string uriName = File.ReadLines(sourceUri).First(); //Read Endpoint URL from textFile
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8080/");
-            //client.BaseAddress = new Uri("https://localhost:44306/"); 
+
+            client.BaseAddress = new Uri(uriName); 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = client.GetAsync("api/GetData/GetTextFile").Result;
+            HttpResponseMessage response = client.GetAsync("api/GetTimeData/GetExport").Result;
             if (response.IsSuccessStatusCode)
             {
                 T_Text_File = response.Content.ReadAsAsync<List<TestTextFile>>().Result;
@@ -43,7 +45,7 @@ namespace TaskExport
         {
             string sourceFilename = @"C:\BioLink\PathConfig.txt";
             string targetFilename = File.ReadLines(sourceFilename).First();
-            FileInfo fi = new FileInfo(targetFilename + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt");
+            FileInfo fi = new FileInfo(targetFilename + "\\access-log-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt");
             
             fi.Delete();
             if (!File.Exists(fi.ToString()))
@@ -52,7 +54,7 @@ namespace TaskExport
                 {
                     foreach(var item in text_File())
                     {
-                        sw.WriteLine(string.Format("ID:{0}, TEXT:{1}, Create Date:{2}", item.ID, item.TEXT, item.CREATE_DATE));
+                        sw.WriteLine(string.Format("{0} {1} {2}", item.DEVDT, item.TIME, item.USRID));
                     }
                     
                 }

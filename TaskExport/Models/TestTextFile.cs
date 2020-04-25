@@ -8,10 +8,8 @@ namespace TaskExport.Models
 {
     public class TestTextFile
     {
-        public int ID { get; set; }
-
-        public string TEXT { get; set; }
-
-        public DateTime? CREATE_DATE { get; set; }
+        public string DEVDT { get; set; }
+        public string TIME { get; set; }
+        public string USRID { get; set; }
     }
 }
