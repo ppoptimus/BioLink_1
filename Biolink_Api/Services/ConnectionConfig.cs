@@ -5,12 +5,12 @@ using System.Data;
 
 namespace Biolink_Api.Services
 {
-    public class ConnectionConfig
+    public class ServiceCommand
     {
         private string myCon = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectMariaDB"].ConnectionString;
         MySqlConnection conn;
 
-        public ConnectionConfig()
+        public ServiceCommand()
         {
             conn = new MySqlConnection(myCon);
         }
@@ -37,8 +37,8 @@ namespace Biolink_Api.Services
         public string ExportText()
         {
             string json;
-            var getLastMonth = "202002"; //DateTime.Now.AddDays(-1).ToString("yyyyMM");
-            var getLastDay = "20200212"; //DateTime.Now.AddDays(-1).ToString("yyyyMMdd");
+            var getLastMonth = DateTime.Now.AddDays(-1).ToString("yyyyMM");
+            var getLastDay = DateTime.Now.AddDays(-1).ToString("yyyyMMdd");
             try
             {
                 var sqlQuery = @"select FROM_UNIXTIME(DEVDT, '%Y%m%d') as DEVDT, FROM_UNIXTIME(DEVDT, '%H%i%S') as TIME, USRID from t_lg" + getLastMonth +

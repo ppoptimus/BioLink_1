@@ -7,7 +7,7 @@ namespace Biolink_Api.Controllers
 {
     public class GetTimeDataController : ApiController
     {
-        ConnectionConfig ConnectionConfig = new ConnectionConfig();
+        ServiceCommand ConnectionConfig = new ServiceCommand();
         private GetTimeDataController()
         {
             ConnectionConfig.ConnectMySql();
