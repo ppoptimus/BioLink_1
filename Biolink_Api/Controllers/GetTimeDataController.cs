@@ -7,15 +7,15 @@ namespace Biolink_Api.Controllers
 {
     public class GetTimeDataController : ApiController
     {
-        ServiceCommand ConnectionConfig = new ServiceCommand();
+        ServiceCommand Command = new ServiceCommand();
         private GetTimeDataController()
         {
-            ConnectionConfig.ConnectMySql();
+            Command.ConnectMySql();
         }
 
         public IHttpActionResult GetExport()
         {
-            string str = ConnectionConfig.ExportText();
+            string str = Command.ExportText();
             try
             {
                 dynamic jsons = JsonConvert.DeserializeObject(str);

@@ -37,6 +37,8 @@ namespace Biolink_Api.Services
         public string ExportText()
         {
             string json;
+            //var getLastMonth = "202003";
+            //var getLastDay = "20200320";
             var getLastMonth = DateTime.Now.AddDays(-1).ToString("yyyyMM");
             var getLastDay = DateTime.Now.AddDays(-1).ToString("yyyyMMdd");
             try
