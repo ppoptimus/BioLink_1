@@ -37,8 +37,11 @@
             this.btnBrowse = new MetroFramework.Controls.MetroButton();
             this.sdPath = new System.Windows.Forms.SaveFileDialog();
             this.btnSubmit = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabConfigPath.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblCloseForm
@@ -56,11 +59,12 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabConfigPath);
+            this.tabControl.Controls.Add(this.metroTabPage1);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl.FontWeight = MetroFramework.MetroTabControlWeight.Regular;
             this.tabControl.Location = new System.Drawing.Point(20, 60);
             this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
+            this.tabControl.SelectedIndex = 1;
             this.tabControl.Size = new System.Drawing.Size(760, 286);
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl.TabIndex = 1;
@@ -81,7 +85,7 @@
             this.tabConfigPath.Name = "tabConfigPath";
             this.tabConfigPath.Size = new System.Drawing.Size(752, 244);
             this.tabConfigPath.TabIndex = 0;
-            this.tabConfigPath.Text = " Set Auto Export";
+            this.tabConfigPath.Text = " Set Auto Export  ";
             this.tabConfigPath.VerticalScrollbarBarColor = true;
             this.tabConfigPath.VerticalScrollbarHighlightOnWheel = false;
             this.tabConfigPath.VerticalScrollbarSize = 10;
@@ -145,6 +149,35 @@
             this.btnSubmit.UseStyleColors = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.Controls.Add(this.label2);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(752, 244);
+            this.metroTabPage1.TabIndex = 1;
+            this.metroTabPage1.Text = "  Set FTP Export";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label2.Location = new System.Drawing.Point(33, 48);
+            this.label2.Name = "label2";
+            this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label2.Size = new System.Drawing.Size(83, 18);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Select Path";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -161,6 +194,8 @@
             this.tabControl.ResumeLayout(false);
             this.tabConfigPath.ResumeLayout(false);
             this.tabConfigPath.PerformLayout();
+            this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,5 +210,7 @@
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Label label1;
         private MetroFramework.Controls.MetroButton btnSubmit;
+        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private System.Windows.Forms.Label label2;
     }
 }
