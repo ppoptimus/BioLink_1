@@ -15,7 +15,6 @@ namespace TaskExport
     {
         static void Main(string[] args)
         {
-            UploadTextFile();
             //ExportTextFile();            
         }
 
@@ -63,14 +62,5 @@ namespace TaskExport
             }
         }
 
-        private static void UploadTextFile()
-        {
-            string localFile = @"C:\BioLink\PathConfig.txt";
-            using (var client = new WebClient())
-            {
-                client.Credentials = new NetworkCredential("", "");
-                client.UploadFile("ftp://192.168.1.101/Programs", WebRequestMethods.Ftp.UploadFile, localFile);
-            }
-        }
     }
 }
