@@ -13,18 +13,50 @@ namespace DownloadText
     {
         static void Main(string[] args)
         {
-            Get();
+            GetTextFile();
         }
 
-        public static void Get()
+        public static string GetFileName()
         {
+            var fileName = "";
             using (var client = new HttpClient())
             {
                 string sourceUri = @"C:\BioLink\EndPointUri.txt";
-                string uri = File.ReadLines(sourceUri).First(); //Read Endpoint URL from textFile
-                var appSettings = ConfigurationManager.AppSettings["GetText"]; //Get api method from AppSettings
+                string uriEndpoint = File.ReadLines(sourceUri).First(); //Read Endpoint URL from textFile
+                var uriMethod = ConfigurationManager.AppSettings["GetFileName"]; //Get api method from AppSettings
 
-                var response = client.GetAsync(uri + appSettings).Result;
+                try
+                {
+                    var response = client.GetAsync(uriEndpoint + uriMethod).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = response.Content;
+
+                        fileName = responseContent.ReadAsStringAsync().Result;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+               
+            }
+
+            return fileName;
+        }
+        public static void GetTextFile()
+        {
+            using (var client = new HttpClient())
+            {
+                var sourceUri = ConfigurationManager.AppSettings["EndPointUri"]; //Get path ที่เก็บ endpoint from AppSettings
+                var uriMethod = ConfigurationManager.AppSettings["GetText"]; //Get api method from AppSettings
+                var uriEndpoint = File.ReadLines(sourceUri).First(); //Read Endpoint URL from textFile
+                var fileName = GetFileName(); //get FileName
+
+                //call web service Mothod GET send with parameter fileName//
+                var response = client.GetAsync(uriEndpoint + uriMethod + "?fileName=" + fileName).Result; 
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -32,16 +64,16 @@ namespace DownloadText
 
                     string responseString = responseContent.ReadAsStringAsync().Result;
 
-                    WriteText(responseString);
+                    WriteText(fileName, responseString);
                 }
             }
         }
 
-        public static void WriteText(string text)
+        public static void WriteText(string fileName, string text)
         {
-            string sourceFilename = @"C:\BioLink\PathConfig.txt";
+            string sourceFilename = ConfigurationManager.AppSettings["PathToWriteFile"];
             string docPath = File.ReadLines(sourceFilename).First();
-            FileInfo fi = new FileInfo(docPath + "\\access-log-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt");
+            FileInfo fi = new FileInfo(docPath + @"\" + fileName);
 
             fi.Delete();
             if (!File.Exists(fi.ToString()))
@@ -52,5 +84,23 @@ namespace DownloadText
                 }
             }
         }
+
+        public static void Log(string logMessage, TextWriter w)
+        {
+            using (StreamWriter sw = File.AppendText("log.txt"))
+            {
+                Log("Test1", sw);
+                Log("Test2", sw);
+            }
+            w.Write("\r\nLog Entry : ");
+            w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
+            w.WriteLine("  :");
+            w.WriteLine($"  :{logMessage}");
+            w.WriteLine("-------------------------------");
+        }
     }
 }
+
+/**Hitory 
+- เหลือลง log
+ **/
