@@ -29,19 +29,24 @@ namespace DownloadText
                 {
                     var response = client.GetAsync(uriEndpoint + uriMethod).Result;
 
+                    //Log
+                    using (StreamWriter w = File.AppendText(LogPath())){Log(response.RequestMessage.ToString(), "GetFileName", w);}
+                    
                     if (response.IsSuccessStatusCode)
                     {
+                        using (StreamWriter w = File.AppendText(LogPath())) { Log(response.StatusCode.ToString(), "GetFileName", w); }
+                        
                         var responseContent = response.Content;
-
+                        using (StreamWriter w = File.AppendText(LogPath())) { Log(responseContent.ReadAsStringAsync().Result, "GetFileName", w); }
+                        
                         fileName = responseContent.ReadAsStringAsync().Result;
                     }
                 }
                 catch (Exception ex)
                 {
-
-                    throw;
+                    using (StreamWriter w = File.AppendText(LogPath())) { Log(ex.Message, "GetFileName", w); }
                 }
-               
+
             }
 
             return fileName;
@@ -56,12 +61,14 @@ namespace DownloadText
                 var fileName = GetFileName(); //get FileName
 
                 //call web service Mothod GET send with parameter fileName//
-                var response = client.GetAsync(uriEndpoint + uriMethod + "?fileName=" + fileName).Result; 
+                var response = client.GetAsync(uriEndpoint + uriMethod + "?fileName=" + fileName).Result;
+                using (StreamWriter w = File.AppendText(LogPath())) { Log(response.RequestMessage.ToString(), "GetTextFile", w); }
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var responseContent = response.Content;
+                    using (StreamWriter w = File.AppendText(LogPath())) { Log(response.StatusCode.ToString(), "GetTextFile", w); }
 
+                    var responseContent = response.Content;
                     string responseString = responseContent.ReadAsStringAsync().Result;
 
                     WriteText(fileName, responseString);
@@ -75,9 +82,10 @@ namespace DownloadText
             string docPath = File.ReadLines(sourceFilename).First();
             FileInfo fi = new FileInfo(docPath + @"\" + fileName);
 
-            fi.Delete();
+            if (File.Exists(fi.ToString())) { fi.Delete(); }
             if (!File.Exists(fi.ToString()))
             {
+                Directory.CreateDirectory(Path.GetDirectoryName(fi.ToString()));
                 using (StreamWriter sw = File.CreateText(fi.ToString()))
                 {
                     sw.Write(text);
@@ -85,22 +93,26 @@ namespace DownloadText
             }
         }
 
-        public static void Log(string logMessage, TextWriter w)
+        public static string LogPath()
         {
-            using (StreamWriter sw = File.AppendText("log.txt"))
-            {
-                Log("Test1", sw);
-                Log("Test2", sw);
-            }
-            w.Write("\r\nLog Entry : ");
-            w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
-            w.WriteLine("  :");
-            w.WriteLine($"  :{logMessage}");
-            w.WriteLine("-------------------------------");
+            var fileName = DateTime.Now.ToString("yyyyMMdd");
+            string currentDir = Environment.CurrentDirectory;
+            string path = currentDir +@"\Logs" + @"\" + fileName + ".txt";
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+
+            return path;
+        }
+
+        public static void Log(string logMessage, string logFunction, TextWriter w)
+        {
+            w.WriteLine($"\r\nAction name :{logFunction} ");
+            w.WriteLine($"Create date :{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
+            w.WriteLine($"Message :{logMessage}");
+            w.WriteLine("--------------------------------------------------------------");
         }
     }
 }
 
 /**Hitory 
-- เหลือลง log
+
  **/

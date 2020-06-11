@@ -37,11 +37,10 @@
             this.btnBrowse = new MetroFramework.Controls.MetroButton();
             this.sdPath = new System.Windows.Forms.SaveFileDialog();
             this.btnSubmit = new MetroFramework.Controls.MetroButton();
-            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.lblCurrentPath = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabConfigPath.SuspendLayout();
-            this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblCloseForm
@@ -59,12 +58,11 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabConfigPath);
-            this.tabControl.Controls.Add(this.metroTabPage1);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl.FontWeight = MetroFramework.MetroTabControlWeight.Regular;
             this.tabControl.Location = new System.Drawing.Point(20, 60);
             this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 1;
+            this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(760, 286);
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl.TabIndex = 1;
@@ -75,6 +73,8 @@
             // 
             // tabConfigPath
             // 
+            this.tabConfigPath.Controls.Add(this.label2);
+            this.tabConfigPath.Controls.Add(this.lblCurrentPath);
             this.tabConfigPath.Controls.Add(this.txtPath);
             this.tabConfigPath.Controls.Add(this.label1);
             this.tabConfigPath.Controls.Add(this.btnBrowse);
@@ -95,7 +95,7 @@
             this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.txtPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtPath.Location = new System.Drawing.Point(122, 53);
+            this.txtPath.Location = new System.Drawing.Point(122, 82);
             this.txtPath.MaxLength = 1200;
             this.txtPath.Multiline = true;
             this.txtPath.Name = "txtPath";
@@ -108,7 +108,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(24, 59);
+            this.label1.Location = new System.Drawing.Point(24, 88);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(83, 18);
@@ -122,7 +122,7 @@
             this.btnBrowse.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btnBrowse.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.btnBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnBrowse.Location = new System.Drawing.Point(630, 53);
+            this.btnBrowse.Location = new System.Drawing.Point(630, 82);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(90, 32);
             this.btnBrowse.Style = MetroFramework.MetroColorStyle.Blue;
@@ -149,34 +149,26 @@
             this.btnSubmit.UseStyleColors = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // metroTabPage1
+            // lblCurrentPath
             // 
-            this.metroTabPage1.Controls.Add(this.label2);
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(752, 244);
-            this.metroTabPage1.TabIndex = 1;
-            this.metroTabPage1.Text = "  Set FTP Export";
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
-            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.VerticalScrollbarSize = 10;
+            this.lblCurrentPath.AutoSize = true;
+            this.lblCurrentPath.BackColor = System.Drawing.Color.Transparent;
+            this.lblCurrentPath.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCurrentPath.Location = new System.Drawing.Point(214, 62);
+            this.lblCurrentPath.Name = "lblCurrentPath";
+            this.lblCurrentPath.Size = new System.Drawing.Size(0, 17);
+            this.lblCurrentPath.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(33, 48);
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.Location = new System.Drawing.Point(119, 62);
             this.label2.Name = "label2";
-            this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label2.Size = new System.Drawing.Size(83, 18);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Select Path";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label2.Size = new System.Drawing.Size(99, 17);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Current path : ";
             // 
             // frmMain
             // 
@@ -191,11 +183,10 @@
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Config Path";
+            this.TopMost = true;
             this.tabControl.ResumeLayout(false);
             this.tabConfigPath.ResumeLayout(false);
             this.tabConfigPath.PerformLayout();
-            this.metroTabPage1.ResumeLayout(false);
-            this.metroTabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,7 +201,7 @@
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Label label1;
         private MetroFramework.Controls.MetroButton btnSubmit;
-        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private System.Windows.Forms.Label lblCurrentPath;
         private System.Windows.Forms.Label label2;
     }
 }

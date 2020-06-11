@@ -1,6 +1,7 @@
 ﻿using MetroFramework.Forms;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BioLinkTaskSchedule.Forms
@@ -10,6 +11,7 @@ namespace BioLinkTaskSchedule.Forms
         public frmMain()
         {
             InitializeComponent();
+            lblCurrentPath.Text = CuurentPath();
         }
 
         private void lblCloseForm_Click(object sender, System.EventArgs e)
@@ -33,6 +35,7 @@ namespace BioLinkTaskSchedule.Forms
                 DialogResult result = MessageBox.Show(message, title, buttons);
                 if (result == DialogResult.Yes)
                 {
+                    lblCurrentPath.Text = txtPath.Text;
                     ConfigPath(txtPath.Text);
                     MessageBox.Show("Set path successful", "Message", MessageBoxButtons.OK);
                     txtPath.Clear();
@@ -58,13 +61,6 @@ namespace BioLinkTaskSchedule.Forms
         private string SetPathFile()
         {
             var path = "";
-            //sdPath.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            //if (sdPath.ShowDialog() == DialogResult.OK)
-            //{
-            //    path = sdPath.FileName;
-            //}
-            //txtPath.Text = path;
-            //return path;
 
             using (var fbd = new FolderBrowserDialog())
             {
@@ -85,7 +81,7 @@ namespace BioLinkTaskSchedule.Forms
         /// <param name="path"></param>
         private void ConfigPath(string textWrite)
         {
-            string startupPath = @"C:\BioLink\PathConfig.txt";
+            string startupPath = @"C:\BioLink\PathToWriteFile.txt";
             try
             {
                 //FilePath//
@@ -105,6 +101,15 @@ namespace BioLinkTaskSchedule.Forms
             }
         }
 
+        private string CuurentPath()
+        {
+            string cuurentPath = string.Empty;
+
+            string startupPath = @"C:\BioLink\PathToWriteFile.txt";
+            cuurentPath = File.ReadLines(startupPath).First();
+
+            return cuurentPath;
+        }
 
     }
 }

@@ -21,25 +21,33 @@ namespace Biolink_Api.Controllers
             appSettingPath = ConfigurationManager.AppSettings["TextFilePath"];
             pathConfigFileJson = appSettingPath + @"\appsettings.production.JSON";
         }
+
         public HttpResponseMessage GetFileName()
         {
-            # region //Get export path from appsettings.production.JSON
-            string jsonString = File.ReadAllText(pathConfigFileJson);
-            var jo = JObject.Parse(jsonString);
-            var fileExportPath = jo["ScheduleExport"]["DestinationPath"].ToString();
-            #endregion
+            var fileExportPath = AppsettingsJson();
 
+            //define date of textFile Export (old)
+            //var dateFormat = DateTime.Now.AddDays(-1).ToString("yyyyMMdd"); 
 
-            var dateFormat = DateTime.Now.AddDays(-1).ToString("yyyyMMdd"); //define date of textFile Export
-            string[] fileEntries = Directory.GetFiles(fileExportPath, "*.txt"); //filter file.txt
-            string value = Array.Find(fileEntries, element => element.Contains(dateFormat)); //find textFile where FileName Contains last day
-            string fileName = Path.GetFileName(value); //get FileName only
+            //filter file.txt (old)
+            //string[] fileEntries = Directory.GetFiles(fileExportPath, "*.txt");
+
+            //find textFile where FileName Contains last day (old)
+            //string value = Array.Find(fileEntries, element => element.Contains(dateFormat));
+
+            //find textFile where Last Modify
+            var fullFileName = Directory.GetFiles(fileExportPath, "*.txt").OrderByDescending(d => new FileInfo(d).LastWriteTimeUtc).FirstOrDefault();
+
+            //get FileName only
+            string fileName = Path.GetFileName(fullFileName); 
 
             var resp = new HttpResponseMessage(HttpStatusCode.OK);
             resp.Content = new StringContent(fileName, System.Text.Encoding.UTF8, "text/plain");
 
-            return resp; //return FileName only
+            //return FileName only
+            return resp;
         }
+
         public virtual IHttpActionResult GetText(string fileName)
         {
 
@@ -52,6 +60,15 @@ namespace Biolink_Api.Controllers
 
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             return ResponseMessage(result);
+        }
+
+        private string AppsettingsJson()
+        {
+            # region //Get export path from appsettings.production.JSON
+            string jsonString = File.ReadAllText(pathConfigFileJson);
+            var jo = JObject.Parse(jsonString);
+            return jo["ScheduleExport"]["DestinationPath"].ToString();
+            #endregion
         }
 
     }
