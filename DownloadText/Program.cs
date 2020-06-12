@@ -51,6 +51,7 @@ namespace DownloadText
 
             return fileName;
         }
+
         public static void GetTextFile()
         {
             using (var client = new HttpClient())
@@ -96,8 +97,8 @@ namespace DownloadText
         public static string LogPath()
         {
             var fileName = DateTime.Now.ToString("yyyyMMdd");
-            string currentDir = Environment.CurrentDirectory;
-            string path = currentDir +@"\Logs" + @"\" + fileName + ".txt";
+            string currentDir = ConfigurationManager.AppSettings["PathToLogs"];
+            string path = currentDir + @"\" + fileName + ".txt";
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
             return path;
