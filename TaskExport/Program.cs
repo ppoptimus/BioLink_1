@@ -15,7 +15,7 @@ namespace TaskExport
     {
         static void Main(string[] args)
         {
-            //ExportTextFile();            
+            ExportTextFile();            
         }
 
         private static List<TestTextFile> text_File()
