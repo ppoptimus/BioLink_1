@@ -1,81 +1,79 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace BioLinkTaskSchedule.Commands
 {
     public class CommandHelper
     {
-        //public string UploadFileToFTP(string source)
-        //{
-        //    var rusult = "test";
-        //    //String sourcefilepath = "@absolutepath"; // e.g. "d:/test.docx"
-        //    String ftpurl = "ftp://192.168.1.1:21/FTP"; // e.g. ftp://serverip/foldername/foldername
-        //    String ftpusername = "PUMPO"; // e.g. username
-        //    String ftppassword = ""; // e.g. password
-        //    try
-        //    {
-        //        string filename = Path.GetFileName(source);
-        //        string ftpfullpath = ftpurl;
-        //        FtpWebRequest ftp = (FtpWebRequest)FtpWebRequest.Create(ftpfullpath);
-        //        ftp.Credentials = new NetworkCredential(ftpusername, ftppassword);
-
-        //        ftp.KeepAlive = true;
-        //        ftp.UseBinary = true;
-        //        ftp.Method = WebRequestMethods.Ftp.UploadFile;
-
-        //        FileStream fs = File.OpenRead(source);
-        //        byte[] buffer = new byte[fs.Length];
-        //        fs.Read(buffer, 0, buffer.Length);
-        //        fs.Close();
-
-        //        Stream ftpstream = ftp.GetRequestStream();
-        //        ftpstream.Write(buffer, 0, buffer.Length);
-        //        ftpstream.Close();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-
-        //    return rusult;
-        //}
-
-        public string FtpUpload(string sourceFile, string serverPath, string ftpFolder, string port, string userName, string passWord)
+        public string FtpUpload(string sourceFile, string serverPath, string folderPath, string port, string userName, string passWord)
         {
             var result = "";
-            FileInfo toUpload = new FileInfo(sourceFile);
+
+            FileInfo fi = new FileInfo(sourceFile);
+            var host = "ftp://" + serverPath + ":" + port + "/" + folderPath + "/" + fi.Name;
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host);
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+
+            request.Credentials = new NetworkCredential(userName, passWord);
+            byte[] fileContents;
 
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverPath + ":" + "/" + ftpFolder + "/" + toUpload);
-                request.Method = WebRequestMethods.Ftp.UploadFile;
-                request.Credentials = new NetworkCredential(userName, passWord);
-                Stream ftpSream = request.GetRequestStream();
-                FileStream file = File.OpenRead(sourceFile);
-
-                int len = 1024;
-                byte[] buffer = new byte[len];
-                int bytesRead = 0;
-
-                do
+                using (StreamReader sourceStream = new StreamReader(sourceFile))
                 {
-                    bytesRead = file.Read(buffer, 0, len);
-                    ftpSream.Write(buffer, 0, bytesRead);
+                    fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
                 }
-                while (bytesRead != 0);
 
-                file.Close();
-                ftpSream.Close();
-                result = "Upload successful";
+                request.ContentLength = fileContents.Length;
+
+                using (Stream requestStream = request.GetRequestStream())
+                {
+                    requestStream.Write(fileContents, 0, fileContents.Length);
+                }
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    result = response.StatusDescription;
+                }
             }
             catch (Exception ex)
             {
                 result = ex.Message;
             }
+            
 
             return result;
+        }
+
+        public bool CheckFTPConnection(string URL, string username, string password)
+        {
+            Uri siteUri = new Uri(URL);
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(siteUri);
+            request.Credentials = new NetworkCredential(username, password);
+            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+            request.UsePassive = true;
+            request.UseBinary = true;
+            request.KeepAlive = false;
+            try
+            {
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                return true;
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
     }

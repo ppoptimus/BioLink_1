@@ -39,9 +39,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnBrowse = new MetroFramework.Controls.MetroButton();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.btnCheckFtp = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtFtpPath = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
-            this.btnUpload = new System.Windows.Forms.Button();
+            this.btnFtpCancel = new System.Windows.Forms.Button();
+            this.btnSaveFtpConfig = new System.Windows.Forms.Button();
             this.btnBrows = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -53,9 +57,6 @@
             this.txtSource = new System.Windows.Forms.TextBox();
             this.sdPath = new System.Windows.Forms.SaveFileDialog();
             this.label3 = new System.Windows.Forms.Label();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtFtpPath = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabConfigPath.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
@@ -192,11 +193,13 @@
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.btnCheckFtp);
             this.metroTabPage1.Controls.Add(this.label9);
             this.metroTabPage1.Controls.Add(this.txtFtpPath);
             this.metroTabPage1.Controls.Add(this.label8);
             this.metroTabPage1.Controls.Add(this.txtPort);
-            this.metroTabPage1.Controls.Add(this.btnUpload);
+            this.metroTabPage1.Controls.Add(this.btnFtpCancel);
+            this.metroTabPage1.Controls.Add(this.btnSaveFtpConfig);
             this.metroTabPage1.Controls.Add(this.btnBrows);
             this.metroTabPage1.Controls.Add(this.label6);
             this.metroTabPage1.Controls.Add(this.label5);
@@ -218,12 +221,45 @@
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
+            // btnCheckFtp
+            // 
+            this.btnCheckFtp.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCheckFtp.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnCheckFtp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheckFtp.Location = new System.Drawing.Point(190, 246);
+            this.btnCheckFtp.Name = "btnCheckFtp";
+            this.btnCheckFtp.Size = new System.Drawing.Size(128, 34);
+            this.btnCheckFtp.TabIndex = 10;
+            this.btnCheckFtp.Text = "Test Connection";
+            this.btnCheckFtp.UseVisualStyleBackColor = false;
+            this.btnCheckFtp.Click += new System.EventHandler(this.btnCheckFtp_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(43, 137);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(129, 20);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Server File Path";
+            // 
+            // txtFtpPath
+            // 
+            this.txtFtpPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFtpPath.Location = new System.Drawing.Point(190, 134);
+            this.txtFtpPath.MaxLength = 255;
+            this.txtFtpPath.Name = "txtFtpPath";
+            this.txtFtpPath.Size = new System.Drawing.Size(317, 27);
+            this.txtFtpPath.TabIndex = 4;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(526, 102);
+            this.label8.Location = new System.Drawing.Point(542, 102);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 20);
             this.label8.TabIndex = 7;
@@ -232,24 +268,43 @@
             // txtPort
             // 
             this.txtPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPort.Location = new System.Drawing.Point(572, 99);
+            this.txtPort.Location = new System.Drawing.Point(588, 99);
             this.txtPort.MaxLength = 10;
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(82, 27);
+            this.txtPort.Size = new System.Drawing.Size(66, 27);
             this.txtPort.TabIndex = 3;
             // 
-            // btnUpload
+            // btnFtpCancel
             // 
-            this.btnUpload.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnUpload.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpload.Location = new System.Drawing.Point(345, 246);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(95, 40);
-            this.btnUpload.TabIndex = 7;
-            this.btnUpload.Text = "Upload";
-            this.btnUpload.UseVisualStyleBackColor = false;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            this.btnFtpCancel.BackColor = System.Drawing.Color.Tomato;
+            this.btnFtpCancel.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnFtpCancel.FlatAppearance.BorderSize = 0;
+            this.btnFtpCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFtpCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFtpCancel.ForeColor = System.Drawing.Color.White;
+            this.btnFtpCancel.Location = new System.Drawing.Point(420, 246);
+            this.btnFtpCancel.Name = "btnFtpCancel";
+            this.btnFtpCancel.Size = new System.Drawing.Size(87, 34);
+            this.btnFtpCancel.TabIndex = 7;
+            this.btnFtpCancel.Text = "Cancel";
+            this.btnFtpCancel.UseVisualStyleBackColor = false;
+            // 
+            // btnSaveFtpConfig
+            // 
+            this.btnSaveFtpConfig.BackColor = System.Drawing.Color.Turquoise;
+            this.btnSaveFtpConfig.Enabled = false;
+            this.btnSaveFtpConfig.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
+            this.btnSaveFtpConfig.FlatAppearance.BorderSize = 0;
+            this.btnSaveFtpConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveFtpConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveFtpConfig.ForeColor = System.Drawing.Color.White;
+            this.btnSaveFtpConfig.Location = new System.Drawing.Point(324, 246);
+            this.btnSaveFtpConfig.Name = "btnSaveFtpConfig";
+            this.btnSaveFtpConfig.Size = new System.Drawing.Size(90, 34);
+            this.btnSaveFtpConfig.TabIndex = 7;
+            this.btnSaveFtpConfig.Text = "Save";
+            this.btnSaveFtpConfig.UseVisualStyleBackColor = false;
+            this.btnSaveFtpConfig.Click += new System.EventHandler(this.btnSaveFtpConfig_Click);
             // 
             // btnBrows
             // 
@@ -314,6 +369,7 @@
             this.txtPassword.Location = new System.Drawing.Point(190, 207);
             this.txtPassword.MaxLength = 255;
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(317, 27);
             this.txtPassword.TabIndex = 6;
             // 
@@ -354,26 +410,6 @@
             this.label3.Size = new System.Drawing.Size(137, 29);
             this.label3.TabIndex = 2;
             this.label3.Text = "Config Path";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(43, 137);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(129, 20);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Server File Path";
-            // 
-            // txtFtpPath
-            // 
-            this.txtFtpPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFtpPath.Location = new System.Drawing.Point(190, 134);
-            this.txtFtpPath.MaxLength = 255;
-            this.txtFtpPath.Name = "txtFtpPath";
-            this.txtFtpPath.Size = new System.Drawing.Size(317, 27);
-            this.txtFtpPath.TabIndex = 4;
             // 
             // frmMain
             // 
@@ -418,12 +454,13 @@
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.TextBox txtSource;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnSaveFtpConfig;
         private System.Windows.Forms.Label label7;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtFtpPath;
+        private System.Windows.Forms.Button btnCheckFtp;
+        private System.Windows.Forms.Button btnFtpCancel;
     }
 }
