@@ -10,10 +10,14 @@ namespace BioLinkTaskSchedule.Forms
     public partial class frmMain : MetroForm
     {
         CommandHelper command = new CommandHelper();
+        public int fileNameType;
+        public string ftpFileName;
+
         public frmMain()
         {
             InitializeComponent();
             lblCurrentPath.Text = CuurentPath();
+            rdoNew.Checked = true;
         }
 
         #region Tab Config path
@@ -114,71 +118,33 @@ namespace BioLinkTaskSchedule.Forms
             return cuurentPath;
         }
 
+
         #endregion Config path
 
-        #region Tab FTP
-         private void btnBrows_Click(object sender, EventArgs e)
+
+        #region Tab Ftp
+        private void btnConfigFtp_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, ValidateNames = true, Filter = "All files|*.*" })
-            {
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    FileInfo fi = new FileInfo(ofd.FileName);
-                    txtSource.Text = fi.FullName;
-                    btnSaveFtpConfig.Enabled = true;
-                }
-            }
+            fileNameType = (rdoNew.Checked == true) ? 1 : 2;
+            ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
+
+            popFtpConfig popFtp = new popFtpConfig(fileNameType, ftpFileName);
+            popFtp.ShowDialog();
+        }
+        private void rdoNew_CheckedChanged(object sender, EventArgs e)
+        {
+            txtNewFileName.Enabled = true;
+            txtReplaceFileName.Enabled = false;
         }
 
-        private void btnSaveFtpConfig_Click(object sender, EventArgs e)
+        private void rdoReplace_CheckedChanged(object sender, EventArgs e)
         {
-            FileInfo sourceFile = new FileInfo(txtSource.Text);
-            var source = sourceFile.Name;
-            var server = txtServer.Text;
-            var ftpPath = txtFtpPath.Text;
-            var port = txtPort.Text;
-            var userName = txtUserName.Text;
-            var passWord = txtPassword.Text;
-            string textWrite = $"{source},{server},{ftpPath},{port},{userName},{passWord}";
-
-            string startupPath = @"C:\BioLink\FtpConfig.txt";
-            try
-            {
-                FileInfo fi = new FileInfo(startupPath);
-                fi.Delete();
-                if (!File.Exists(startupPath))
-                {
-                    using (StreamWriter sw = File.CreateText(startupPath))
-                    {
-                        sw.WriteLine(textWrite);
-                    }
-                }
-            }
-            catch (System.Exception)
-            {
-                return;
-            }
-            //string result = command.FtpUpload(txtSource.Text, txtServer.Text, txtFtpPath.Text, txtPort.Text, txtUserName.Text, txtPassword.Text);
-            //if(!String.IsNullOrEmpty(result))
-            //{
-            //    MessageBox.Show(result, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            txtNewFileName.Enabled = false;
+            txtReplaceFileName.Enabled = true;
         }
 
-        private void btnCheckFtp_Click(object sender, EventArgs e)
-        {
-            string url = "ftp://" + txtServer.Text + ":" + txtPort.Text;
-            if (command.CheckFTPConnection(url, txtUserName.Text, txtPassword.Text))
-            {
-                MessageBox.Show("Ftp server connected", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Ftp server not connect!!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        #endregion FTP
+        #endregion Tab Ftp
 
     }
 }
