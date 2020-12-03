@@ -42,14 +42,18 @@ namespace BioLinkTaskSchedule.Forms
         private void btnCheckFtp_Click(object sender, EventArgs e)
         {
             string url = "ftp://" + txtServer.Text + ":" + txtPort.Text;
-            if (command.CheckFTPConnection(url, txtUserName.Text, txtPassword.Text))
+            if(!String.IsNullOrEmpty(txtServer.Text) && !String.IsNullOrEmpty(txtPort.Text))
             {
-                MessageBox.Show("Ftp server connected", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (command.CheckFTPConnection(url, txtUserName.Text, txtPassword.Text))
+                {
+                    MessageBox.Show("Ftp server connected", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ftp server not connect!!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
-            {
-                MessageBox.Show("Ftp server not connect!!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
         }
 
         private void btnSaveFtpConfig_Click(object sender, EventArgs e)
@@ -58,8 +62,7 @@ namespace BioLinkTaskSchedule.Forms
             string startupPath = @"C:\BioLink\FtpConfig.txt";
             try
             {
-                FileInfo sourceFile = new FileInfo(txtSource.Text);
-                var source = sourceFile.Name;
+                var source = txtSource.Text;
                 var server = txtServer.Text;
                 var ftpPath = txtFtpPath.Text;
                 var port = txtPort.Text;

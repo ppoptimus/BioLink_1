@@ -121,14 +121,13 @@ namespace BioLinkTaskSchedule.Forms
 
         #endregion Config path
 
-
         #region Tab Ftp
         private void btnConfigFtp_Click(object sender, EventArgs e)
         {
             fileNameType = (rdoNew.Checked == true) ? 1 : 2;
             ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
 
-            popFtpConfig popFtp = new popFtpConfig(fileNameType, ftpFileName);
+            var popFtp = new popFtpConfig(fileNameType, ftpFileName);
             popFtp.ShowDialog();
         }
         private void rdoNew_CheckedChanged(object sender, EventArgs e)
@@ -136,14 +135,11 @@ namespace BioLinkTaskSchedule.Forms
             txtNewFileName.Enabled = true;
             txtReplaceFileName.Enabled = false;
         }
-
         private void rdoReplace_CheckedChanged(object sender, EventArgs e)
         {
             txtNewFileName.Enabled = false;
             txtReplaceFileName.Enabled = true;
         }
-
-
         #endregion Tab Ftp
 
     }
