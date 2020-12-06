@@ -134,11 +134,13 @@ namespace BioLinkTaskSchedule.Forms
         {
             txtNewFileName.Enabled = true;
             txtReplaceFileName.Enabled = false;
+            txtReplaceFileName.Text = string.Empty;
         }
         private void rdoReplace_CheckedChanged(object sender, EventArgs e)
         {
             txtNewFileName.Enabled = false;
             txtReplaceFileName.Enabled = true;
+            txtNewFileName.Text = string.Empty;
         }
         #endregion Tab Ftp
 

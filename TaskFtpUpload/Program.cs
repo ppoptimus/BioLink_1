@@ -34,6 +34,7 @@ namespace TaskFtpUpload
             if (!String.IsNullOrEmpty(result))
             {
                 Console.WriteLine(result);
+                Console.Read();
             }
         }
 
@@ -42,15 +43,15 @@ namespace TaskFtpUpload
             var result = "";
             var host = "";
             FileInfo fi = new FileInfo(sourceFile);
-            if(fileNameType == "1")
+
+            if(fileNameType == "1" || fileNameType == "2")
             {
                 host = "ftp://" + serverPath + ":" + port + "/" + folderPath + "/" + ftpFileName + fi.Extension;
             }
-            if(fileNameType == "2")
+            else
             {
-
+                host = "ftp://" + serverPath + ":" + port + "/" + folderPath + "/" + fi.Name;
             }
-            //host = "ftp://" + serverPath + ":" + port + "/" + folderPath + "/" + fi.Name;
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host);
             request.Method = WebRequestMethods.Ftp.UploadFile;
 
