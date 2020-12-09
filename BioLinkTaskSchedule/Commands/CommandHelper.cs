@@ -65,14 +65,15 @@ namespace BioLinkTaskSchedule.Commands
             }
             catch (WebException e)
             {
-                if (e.Status == WebExceptionStatus.ProtocolError)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                //if (e.Status == WebExceptionStatus.ProtocolError)
+                //{
+                //    return true;
+                //}
+                //else
+                //{
+                //    return false;
+                //}
+                return false;
             }
         }
 

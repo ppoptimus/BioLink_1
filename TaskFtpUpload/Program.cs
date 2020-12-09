@@ -34,7 +34,7 @@ namespace TaskFtpUpload
             if (!String.IsNullOrEmpty(result))
             {
                 Console.WriteLine(result);
-                Console.Read();
+                //Console.Read();
             }
         }
 

@@ -144,5 +144,27 @@ namespace BioLinkTaskSchedule.Forms
         }
         #endregion Tab Ftp
 
+        private void rdoReplace_CheckedChanged_1(object sender, EventArgs e)
+        {
+            txtNewFileName.Enabled = false;
+            txtReplaceFileName.Enabled = true;
+            txtNewFileName.Text = string.Empty;
+        }
+
+        private void rdoNew_CheckedChanged_1(object sender, EventArgs e)
+        {
+            txtNewFileName.Enabled = true;
+            txtReplaceFileName.Enabled = false;
+            txtReplaceFileName.Text = string.Empty;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            fileNameType = (rdoNew.Checked == true) ? 1 : 2;
+            ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
+
+            var popFtp = new popFtpConfig(fileNameType, ftpFileName);
+            popFtp.ShowDialog();
+        }
     }
 }
