@@ -85,7 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BindTextHelper.cs" />
     <Compile Include="Commands\CommandHelper.cs" />
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
@@ -99,7 +98,6 @@
     <Compile Include="Forms\popFtpConfig.Designer.cs">
       <DependentUpon>popFtpConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\BindTextModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmMain.resx">
