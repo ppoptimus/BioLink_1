@@ -38,16 +38,16 @@
             this.txtPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBrowse = new MetroFramework.Controls.MetroButton();
-            this.sdPath = new System.Windows.Forms.SaveFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
-            this.FtpTab = new MetroFramework.Controls.MetroTabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.FtpTab = new MetroFramework.Controls.MetroTabPage();
             this.btnConfigFtp = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnOpenConfig = new System.Windows.Forms.Button();
             this.txtReplaceFileName = new System.Windows.Forms.TextBox();
             this.txtNewFileName = new System.Windows.Forms.TextBox();
             this.rdoReplace = new System.Windows.Forms.RadioButton();
             this.rdoNew = new System.Windows.Forms.RadioButton();
+            this.sdPath = new System.Windows.Forms.SaveFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabConfigPath.SuspendLayout();
             this.FtpTab.SuspendLayout();
@@ -184,16 +184,14 @@
             this.btnBrowse.UseStyleColors = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // label3
+            // groupBox1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(24, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 29);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Config Path";
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Location = new System.Drawing.Point(9, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(730, 121);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
             // 
             // FtpTab
             // 
@@ -210,19 +208,10 @@
             this.FtpTab.VerticalScrollbarHighlightOnWheel = false;
             this.FtpTab.VerticalScrollbarSize = 10;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Location = new System.Drawing.Point(9, 9);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(730, 121);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            // 
             // btnConfigFtp
             // 
             this.btnConfigFtp.BackColor = System.Drawing.Color.Transparent;
-            this.btnConfigFtp.Controls.Add(this.button1);
+            this.btnConfigFtp.Controls.Add(this.btnOpenConfig);
             this.btnConfigFtp.Controls.Add(this.txtReplaceFileName);
             this.btnConfigFtp.Controls.Add(this.txtNewFileName);
             this.btnConfigFtp.Controls.Add(this.rdoReplace);
@@ -233,19 +222,19 @@
             this.btnConfigFtp.TabIndex = 9;
             this.btnConfigFtp.TabStop = false;
             // 
-            // button1
+            // btnOpenConfig
             // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(581, 69);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(2);
-            this.button1.Size = new System.Drawing.Size(38, 36);
-            this.button1.TabIndex = 9;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnOpenConfig.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOpenConfig.BackgroundImage")));
+            this.btnOpenConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOpenConfig.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnOpenConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenConfig.Location = new System.Drawing.Point(581, 69);
+            this.btnOpenConfig.Name = "btnOpenConfig";
+            this.btnOpenConfig.Padding = new System.Windows.Forms.Padding(2);
+            this.btnOpenConfig.Size = new System.Drawing.Size(38, 36);
+            this.btnOpenConfig.TabIndex = 9;
+            this.btnOpenConfig.UseVisualStyleBackColor = true;
+            this.btnOpenConfig.Click += new System.EventHandler(this.btnOpenConfig_Click);
             // 
             // txtReplaceFileName
             // 
@@ -294,6 +283,17 @@
             this.rdoNew.UseVisualStyleBackColor = true;
             this.rdoNew.CheckedChanged += new System.EventHandler(this.rdoNew_CheckedChanged_1);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label3.Location = new System.Drawing.Point(24, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(137, 29);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Config Path";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -332,7 +332,7 @@
         private MetroFramework.Controls.MetroTabPage FtpTab;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox btnConfigFtp;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOpenConfig;
         private System.Windows.Forms.TextBox txtReplaceFileName;
         private System.Windows.Forms.TextBox txtNewFileName;
         private System.Windows.Forms.RadioButton rdoReplace;

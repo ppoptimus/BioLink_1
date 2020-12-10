@@ -1,4 +1,5 @@
 ﻿using BioLinkTaskSchedule.Commands;
+using BioLinkTaskSchedule.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,25 @@ namespace BioLinkTaskSchedule.Forms
             InitializeComponent();
             _fileNameType = fileNameType;
             _ftpFileName = ftpFileName;
+            BindTextBox();
+        }
+
+        public void BindTextBox()
+        {
+            string sourceUri = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
+            FileInfo fi = new FileInfo(sourceUri);
+            if (File.Exists(fi.ToString()))
+            {
+                string configText = File.ReadLines(sourceUri).First();
+
+                string[] str = configText.Split('|');
+                txtServer.Text = str[0];
+                txtPort.Text = str[1];
+                txtFtpPath.Text = str[2];
+                txtUserName.Text = str[3];
+                txtPassword.Text = str[4];
+            }
+            
         }
 
         private void btnBrows_Click(object sender, EventArgs e)
@@ -80,21 +100,17 @@ namespace BioLinkTaskSchedule.Forms
                     }
                 }
                 
-                DialogResult result = MessageBox.Show("Config FTP Success", "Information", buttons);
+                DialogResult result = MessageBox.Show("Config FTP Success", "Information", buttons, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
                 {
-                    this.Close();
+                    command.WriteTextMapModel(txtServer.Text, txtPort.Text, txtFtpPath.Text, txtUserName.Text, txtPassword.Text);
+                    this.Hide();
                 }
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            //string result = command.FtpUpload(txtSource.Text, txtServer.Text, txtFtpPath.Text, txtPort.Text, txtUserName.Text, txtPassword.Text);
-            //if(!String.IsNullOrEmpty(result))
-            //{
-            //    MessageBox.Show(result, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
         }
 
         private void btnFtpCancel_Click(object sender, EventArgs e)

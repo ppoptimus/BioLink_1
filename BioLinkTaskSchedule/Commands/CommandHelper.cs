@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using BioLinkTaskSchedule.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 
@@ -74,6 +75,22 @@ namespace BioLinkTaskSchedule.Commands
                 //    return false;
                 //}
                 return false;
+            }
+        }
+
+        public void WriteTextMapModel(string ipServer, string port, string ftpPath, string userName, string passWord)
+        {
+            string textWrite = $"{ipServer}|{port}|{ftpPath}|{userName}|{passWord}";
+            var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
+            FileInfo fi = new FileInfo(fileName);
+
+            fi.Delete();
+            if (!File.Exists(fi.ToString()))
+            {
+                using (StreamWriter sw = File.CreateText(fi.ToString()))
+                {
+                    sw.WriteLine(textWrite);
+                }
             }
         }
 

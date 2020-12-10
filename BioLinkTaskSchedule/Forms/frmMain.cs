@@ -10,6 +10,7 @@ namespace BioLinkTaskSchedule.Forms
     public partial class frmMain : MetroForm
     {
         CommandHelper command = new CommandHelper();
+
         public int fileNameType;
         public string ftpFileName;
 
@@ -120,30 +121,9 @@ namespace BioLinkTaskSchedule.Forms
 
 
         #endregion Config path
+        //-------------------------------------------------------------------------------------------------------------
 
-        #region Tab Ftp
-        private void btnConfigFtp_Click(object sender, EventArgs e)
-        {
-            fileNameType = (rdoNew.Checked == true) ? 1 : 2;
-            ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
-
-            var popFtp = new popFtpConfig(fileNameType, ftpFileName);
-            popFtp.ShowDialog();
-        }
-        private void rdoNew_CheckedChanged(object sender, EventArgs e)
-        {
-            txtNewFileName.Enabled = true;
-            txtReplaceFileName.Enabled = false;
-            txtReplaceFileName.Text = string.Empty;
-        }
-        private void rdoReplace_CheckedChanged(object sender, EventArgs e)
-        {
-            txtNewFileName.Enabled = false;
-            txtReplaceFileName.Enabled = true;
-            txtNewFileName.Text = string.Empty;
-        }
-        #endregion Tab Ftp
-
+        #region Tab Ftp     
         private void rdoReplace_CheckedChanged_1(object sender, EventArgs e)
         {
             txtNewFileName.Enabled = false;
@@ -158,13 +138,20 @@ namespace BioLinkTaskSchedule.Forms
             txtReplaceFileName.Text = string.Empty;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnOpenConfig_Click(object sender, EventArgs e)
         {
-            fileNameType = (rdoNew.Checked == true) ? 1 : 2;
-            ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
+            if(!String.IsNullOrEmpty(txtNewFileName.Text) || !String.IsNullOrEmpty(txtReplaceFileName.Text))
+            {
+                fileNameType = (rdoNew.Checked == true) ? 1 : 2;
+                ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
 
-            var popFtp = new popFtpConfig(fileNameType, ftpFileName);
-            popFtp.ShowDialog();
+                var popFtp = new popFtpConfig(fileNameType, ftpFileName);
+                popFtp.ShowDialog();
+            }
+            
         }
+
+        #endregion Tab Ftp
+        //-------------------------------------------------------------------------------------------------------------
     }
 }
