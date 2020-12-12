@@ -30,11 +30,12 @@ namespace BioLinkTaskSchedule.Forms
                 string configText = File.ReadLines(sourceUri).First();
 
                 string[] str = configText.Split('|');
-                txtServer.Text = str[0];
-                txtPort.Text = str[1];
-                txtFtpPath.Text = str[2];
-                txtUserName.Text = str[3];
-                txtPassword.Text = str[4];
+                txtSource.Text = str[0];
+                txtServer.Text = str[1];
+                txtPort.Text = str[2];
+                txtFtpPath.Text = str[3];
+                txtUserName.Text = str[4];
+                txtPassword.Text = str[5];
             }
             
         }
@@ -47,7 +48,6 @@ namespace BioLinkTaskSchedule.Forms
                 {
                     FileInfo fi = new FileInfo(ofd.FileName);
                     txtSource.Text = fi.FullName;
-                    btnSaveFtpConfig.Enabled = true;
                 }
             }
         }
@@ -96,7 +96,7 @@ namespace BioLinkTaskSchedule.Forms
                 DialogResult result = MessageBox.Show("Config FTP Success", "Information", buttons, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
                 {
-                    command.WriteTextMapModel(txtServer.Text, txtPort.Text, txtFtpPath.Text, txtUserName.Text, txtPassword.Text);
+                    command.WriteTextMapModel(txtSource.Text, txtServer.Text, txtPort.Text, txtFtpPath.Text, txtUserName.Text, txtPassword.Text);
                     this.Hide();
                 }
             }

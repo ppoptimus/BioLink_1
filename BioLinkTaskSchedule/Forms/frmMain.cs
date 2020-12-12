@@ -10,15 +10,15 @@ namespace BioLinkTaskSchedule.Forms
     public partial class frmMain : MetroForm
     {
         CommandHelper command = new CommandHelper();
-
         public int fileNameType;
         public string ftpFileName;
+        public int fileTypeChecked = 0;
 
         public frmMain()
         {
             InitializeComponent();
             lblCurrentPath.Text = CuurentPath();
-            rdoNew.Checked = true;
+            BindTextBox();
         }
 
         #region Tab Config path
@@ -123,26 +123,30 @@ namespace BioLinkTaskSchedule.Forms
         #endregion Config path
         //-------------------------------------------------------------------------------------------------------------
 
-        #region Tab Ftp     
-        private void rdoReplace_CheckedChanged_1(object sender, EventArgs e)
-        {
-            txtNewFileName.Enabled = false;
-            txtReplaceFileName.Enabled = true;
-            txtNewFileName.Text = string.Empty;
-        }
-
+        #region Tab Ftp   
         private void rdoNew_CheckedChanged_1(object sender, EventArgs e)
         {
             txtNewFileName.Enabled = true;
             txtReplaceFileName.Enabled = false;
             txtReplaceFileName.Text = string.Empty;
+            fileTypeChecked = 1;
+        }
+
+        private void rdoReplace_CheckedChanged_1(object sender, EventArgs e)
+        {
+            txtNewFileName.Enabled = false;
+            txtReplaceFileName.Enabled = true;
+            txtNewFileName.Text = string.Empty;
+            fileTypeChecked = 2;
         }
 
         private void btnOpenConfig_Click(object sender, EventArgs e)
         {
             if(!String.IsNullOrEmpty(txtNewFileName.Text) || !String.IsNullOrEmpty(txtReplaceFileName.Text))
             {
-                fileNameType = (rdoNew.Checked == true) ? 1 : 2;
+                if(rdoNew.Checked == true) { fileNameType = 1; }
+                else if (rdoReplace.Checked == true) { fileNameType = 2; }
+                else { fileNameType = 0; }
                 ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
 
                 var popFtp = new popFtpConfig(fileNameType, ftpFileName);
@@ -151,6 +155,59 @@ namespace BioLinkTaskSchedule.Forms
             
         }
 
+        private void btnSaveTabFtp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
+                string textWrite = $"{fileTypeChecked}|{ftpFileName}";
+                var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindTabFtpConfig.txt");
+                FileInfo fi = new FileInfo(fileName);
+
+                fi.Delete();
+                if (!File.Exists(fi.ToString()))
+                {
+                    using (StreamWriter sw = File.CreateText(fi.ToString()))
+                    {
+                        sw.WriteLine(textWrite);
+                    }
+                }
+                MessageBox.Show("Save Success", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        public void BindTextBox()
+        {
+            string sourceUri = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindTabFtpConfig.txt");
+            FileInfo fi = new FileInfo(sourceUri);
+            if (File.Exists(fi.ToString()))
+            {
+                string configText = File.ReadLines(sourceUri).First();
+
+                string[] str = configText.Split('|');
+                if(str[0] == "1")
+                {
+                    rdoNew.Checked = true;
+                    txtNewFileName.Text = str[1];
+                }
+                else if (str[0] == "2")
+                {
+                    rdoReplace.Checked = true;
+                    txtReplaceFileName.Text = str[1];
+                }
+                else
+                {
+                    rdoReplace.Checked = false;
+                    rdoNew.Checked = false;
+                }
+
+            }
+        }
         #endregion Tab Ftp
         //-------------------------------------------------------------------------------------------------------------
     }

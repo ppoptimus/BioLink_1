@@ -75,9 +75,9 @@ namespace BioLinkTaskSchedule.Commands
             }
         }
 
-        public void WriteTextMapModel(string ipServer, string port, string ftpPath, string userName, string passWord)
+        public void WriteTextMapModel(string source, string ipServer, string port, string ftpPath, string userName, string passWord)
         {
-            string textWrite = $"{ipServer}|{port}|{ftpPath}|{userName}|{passWord}";
+            string textWrite = $"{source}|{ipServer}|{port}|{ftpPath}|{userName}|{passWord}";
             var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
             FileInfo fi = new FileInfo(fileName);
 

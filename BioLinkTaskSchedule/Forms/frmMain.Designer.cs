@@ -40,6 +40,7 @@
             this.btnBrowse = new MetroFramework.Controls.MetroButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.FtpTab = new MetroFramework.Controls.MetroTabPage();
+            this.btnSaveTabFtp = new MetroFramework.Controls.MetroButton();
             this.btnConfigFtp = new System.Windows.Forms.GroupBox();
             this.btnOpenConfig = new System.Windows.Forms.Button();
             this.txtReplaceFileName = new System.Windows.Forms.TextBox();
@@ -124,7 +125,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(114, 31);
+            this.label2.Location = new System.Drawing.Point(114, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 17);
             this.label2.TabIndex = 6;
@@ -145,7 +146,7 @@
             this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.txtPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtPath.Location = new System.Drawing.Point(117, 51);
+            this.txtPath.Location = new System.Drawing.Point(117, 67);
             this.txtPath.MaxLength = 1200;
             this.txtPath.Multiline = true;
             this.txtPath.Name = "txtPath";
@@ -158,7 +159,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(19, 57);
+            this.label1.Location = new System.Drawing.Point(19, 73);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(83, 18);
@@ -172,7 +173,7 @@
             this.btnBrowse.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btnBrowse.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.btnBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnBrowse.Location = new System.Drawing.Point(625, 51);
+            this.btnBrowse.Location = new System.Drawing.Point(625, 67);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(90, 32);
             this.btnBrowse.Style = MetroFramework.MetroColorStyle.Blue;
@@ -187,7 +188,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Location = new System.Drawing.Point(9, 9);
+            this.groupBox1.Location = new System.Drawing.Point(9, 15);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(730, 121);
             this.groupBox1.TabIndex = 7;
@@ -195,6 +196,7 @@
             // 
             // FtpTab
             // 
+            this.FtpTab.Controls.Add(this.btnSaveTabFtp);
             this.FtpTab.Controls.Add(this.btnConfigFtp);
             this.FtpTab.HorizontalScrollbarBarColor = true;
             this.FtpTab.HorizontalScrollbarHighlightOnWheel = false;
@@ -208,6 +210,21 @@
             this.FtpTab.VerticalScrollbarHighlightOnWheel = false;
             this.FtpTab.VerticalScrollbarSize = 10;
             // 
+            // btnSaveTabFtp
+            // 
+            this.btnSaveTabFtp.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btnSaveTabFtp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSaveTabFtp.Location = new System.Drawing.Point(648, 276);
+            this.btnSaveTabFtp.Name = "btnSaveTabFtp";
+            this.btnSaveTabFtp.Size = new System.Drawing.Size(91, 42);
+            this.btnSaveTabFtp.TabIndex = 10;
+            this.btnSaveTabFtp.Text = "Save";
+            this.btnSaveTabFtp.UseCustomBackColor = true;
+            this.btnSaveTabFtp.UseCustomForeColor = true;
+            this.btnSaveTabFtp.UseSelectable = true;
+            this.btnSaveTabFtp.UseStyleColors = true;
+            this.btnSaveTabFtp.Click += new System.EventHandler(this.btnSaveTabFtp_Click);
+            // 
             // btnConfigFtp
             // 
             this.btnConfigFtp.BackColor = System.Drawing.Color.Transparent;
@@ -216,9 +233,9 @@
             this.btnConfigFtp.Controls.Add(this.txtNewFileName);
             this.btnConfigFtp.Controls.Add(this.rdoReplace);
             this.btnConfigFtp.Controls.Add(this.rdoNew);
-            this.btnConfigFtp.Location = new System.Drawing.Point(19, 20);
+            this.btnConfigFtp.Location = new System.Drawing.Point(14, 20);
             this.btnConfigFtp.Name = "btnConfigFtp";
-            this.btnConfigFtp.Size = new System.Drawing.Size(720, 131);
+            this.btnConfigFtp.Size = new System.Drawing.Size(725, 131);
             this.btnConfigFtp.TabIndex = 9;
             this.btnConfigFtp.TabStop = false;
             // 
@@ -337,5 +354,6 @@
         private System.Windows.Forms.TextBox txtNewFileName;
         private System.Windows.Forms.RadioButton rdoReplace;
         private System.Windows.Forms.RadioButton rdoNew;
+        private MetroFramework.Controls.MetroButton btnSaveTabFtp;
     }
 }

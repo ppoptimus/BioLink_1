@@ -119,7 +119,6 @@
             // btnSaveFtpConfig
             // 
             this.btnSaveFtpConfig.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.btnSaveFtpConfig.Enabled = false;
             this.btnSaveFtpConfig.FlatAppearance.BorderColor = System.Drawing.Color.Turquoise;
             this.btnSaveFtpConfig.FlatAppearance.BorderSize = 0;
             this.btnSaveFtpConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

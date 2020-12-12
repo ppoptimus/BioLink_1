@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TaskFtpUpload
 {
@@ -42,6 +40,7 @@ namespace TaskFtpUpload
         {
             var result = "";
             var host = "";
+            var ftpType = (fileNameType == "1") ? "New" : "Replace";
             FileInfo fi = new FileInfo(sourceFile);
 
             if(fileNameType == "1" || fileNameType == "2")
@@ -76,14 +75,68 @@ namespace TaskFtpUpload
                 {
                     result = response.StatusDescription;
                 }
+                WriteLog("FtpUpload", sourceFile, serverPath, port, folderPath, userName, "Success", ftpType, ftpFileName + fi.Extension);
             }
             catch (Exception ex)
             {
                 result = ex.Message;
+                WriteLog("FtpUpload", sourceFile, serverPath, port, folderPath, userName, ex.Message, ftpType, ftpFileName + fi.Extension);
             }
 
 
             return result;
         }
+    
+        public static void WriteLog(string functionName, string sourceFile, string serverPath, string port, string folderPath, string userName, string logMessage, string ftpType, string ftpUploadName)
+        {
+            string directory = Directory.GetCurrentDirectory() + "\\logs";
+            string logFileName = directory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+
+            try
+            {
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                if (!File.Exists(logFileName))
+                {
+                    using (StreamWriter sw = File.CreateText(logFileName))
+                    {
+                        sw.WriteLine($"Action name : {functionName}");
+                        sw.WriteLine($"From source file : {sourceFile}");
+                        sw.WriteLine($"Upload to Server : {serverPath}:{port}/{folderPath}");
+                        sw.WriteLine($"User upload : {userName}");
+                        sw.WriteLine($"Ftp type : {ftpType}");
+                        sw.WriteLine($"Ftp file name  : {ftpUploadName}");
+                        sw.WriteLine($"Create datetime : {DateTime.Now}");
+                        sw.WriteLine($"Message : {logMessage}");
+                        sw.WriteLine("--------------------------------------------------------------------------------------------------------------------");
+                    }
+                }
+                else
+                {
+                    using (StreamWriter sw = File.AppendText(logFileName))
+                    {
+                        sw.WriteLine($"Action name : {functionName}");
+                        sw.WriteLine($"From source file : {sourceFile}");
+                        sw.WriteLine($"Upload to Server : {serverPath}:{port}/{folderPath}");
+                        sw.WriteLine($"User upload : {userName}");
+                        sw.WriteLine($"Ftp type : {ftpType}");
+                        sw.WriteLine($"Ftp file name  : {ftpUploadName}");
+                        sw.WriteLine($"Create datetime : {DateTime.Now}");
+                        sw.WriteLine($"Message : {logMessage}");
+                        sw.WriteLine("--------------------------------------------------------------------------------------------------------------------");
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+    
     }
 }
