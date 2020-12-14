@@ -23,11 +23,20 @@ namespace BioLinkTaskSchedule.Forms
 
         public void BindTextBox()
         {
-            string sourceUri = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
-            FileInfo fi = new FileInfo(sourceUri);
+            //string sourceUri = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
+            string directory = Directory.GetCurrentDirectory() + "\\TextFile";
+            string logFileName = directory + "\\bindText.txt";
+
+            FileInfo fi = new FileInfo(logFileName);
+
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
             if (File.Exists(fi.ToString()))
             {
-                string configText = File.ReadLines(sourceUri).First();
+                string configText = File.ReadLines(logFileName).First();
 
                 string[] str = configText.Split('|');
                 txtSource.Text = str[0];

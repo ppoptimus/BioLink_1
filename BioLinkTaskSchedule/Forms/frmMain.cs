@@ -161,8 +161,15 @@ namespace BioLinkTaskSchedule.Forms
             {
                 ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
                 string textWrite = $"{fileTypeChecked}|{ftpFileName}";
-                var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindTabFtpConfig.txt");
-                FileInfo fi = new FileInfo(fileName);
+                //var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindTabFtpConfig.txt");
+
+                string directory = Directory.GetCurrentDirectory() + "\\TextFile";
+                string logFileName = directory + "\\bindTabFtpConfig.txt";
+                FileInfo fi = new FileInfo(logFileName);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
 
                 fi.Delete();
                 if (!File.Exists(fi.ToString()))
@@ -183,11 +190,16 @@ namespace BioLinkTaskSchedule.Forms
 
         public void BindTextBox()
         {
-            string sourceUri = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindTabFtpConfig.txt");
-            FileInfo fi = new FileInfo(sourceUri);
+            string directory = Directory.GetCurrentDirectory() + "\\TextFile";
+            string logFileName = directory + "\\bindTabFtpConfig.txt";
+            FileInfo fi = new FileInfo(logFileName);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
             if (File.Exists(fi.ToString()))
             {
-                string configText = File.ReadLines(sourceUri).First();
+                string configText = File.ReadLines(logFileName).First();
 
                 string[] str = configText.Split('|');
                 if(str[0] == "1")

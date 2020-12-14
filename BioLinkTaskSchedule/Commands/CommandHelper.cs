@@ -78,10 +78,22 @@ namespace BioLinkTaskSchedule.Commands
         public void WriteTextMapModel(string source, string ipServer, string port, string ftpPath, string userName, string passWord)
         {
             string textWrite = $"{source}|{ipServer}|{port}|{ftpPath}|{userName}|{passWord}";
-            var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
-            FileInfo fi = new FileInfo(fileName);
+            //var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
 
-            fi.Delete();
+            string directory = Directory.GetCurrentDirectory() + "\\TextFile";
+            string logFileName = directory + "\\bindText.txt";
+            FileInfo fi = new FileInfo(logFileName);
+
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            if (File.Exists(fi.ToString()))
+            {
+                fi.Delete();
+            }
+            
             if (!File.Exists(fi.ToString()))
             {
                 using (StreamWriter sw = File.CreateText(fi.ToString()))
