@@ -49,6 +49,7 @@
             this.rdoNew = new System.Windows.Forms.RadioButton();
             this.sdPath = new System.Windows.Forms.SaveFileDialog();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabConfigPath.SuspendLayout();
             this.FtpTab.SuspendLayout();
@@ -196,7 +197,10 @@
             // 
             // FtpTab
             // 
+            this.FtpTab.Controls.Add(this.txtReplaceFileName);
             this.FtpTab.Controls.Add(this.btnSaveTabFtp);
+            this.FtpTab.Controls.Add(this.rdoReplace);
+            this.FtpTab.Controls.Add(this.rdoNew);
             this.FtpTab.Controls.Add(this.btnConfigFtp);
             this.FtpTab.HorizontalScrollbarBarColor = true;
             this.FtpTab.HorizontalScrollbarHighlightOnWheel = false;
@@ -228,16 +232,16 @@
             // btnConfigFtp
             // 
             this.btnConfigFtp.BackColor = System.Drawing.Color.Transparent;
+            this.btnConfigFtp.Controls.Add(this.label4);
             this.btnConfigFtp.Controls.Add(this.btnOpenConfig);
-            this.btnConfigFtp.Controls.Add(this.txtReplaceFileName);
             this.btnConfigFtp.Controls.Add(this.txtNewFileName);
-            this.btnConfigFtp.Controls.Add(this.rdoReplace);
-            this.btnConfigFtp.Controls.Add(this.rdoNew);
+            this.btnConfigFtp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfigFtp.Location = new System.Drawing.Point(14, 20);
             this.btnConfigFtp.Name = "btnConfigFtp";
             this.btnConfigFtp.Size = new System.Drawing.Size(725, 131);
             this.btnConfigFtp.TabIndex = 9;
             this.btnConfigFtp.TabStop = false;
+            this.btnConfigFtp.Text = "New or Replace file";
             // 
             // btnOpenConfig
             // 
@@ -245,7 +249,7 @@
             this.btnOpenConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnOpenConfig.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnOpenConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenConfig.Location = new System.Drawing.Point(581, 69);
+            this.btnOpenConfig.Location = new System.Drawing.Point(648, 60);
             this.btnOpenConfig.Name = "btnOpenConfig";
             this.btnOpenConfig.Padding = new System.Windows.Forms.Padding(2);
             this.btnOpenConfig.Size = new System.Drawing.Size(38, 36);
@@ -258,46 +262,49 @@
             this.txtReplaceFileName.Enabled = false;
             this.txtReplaceFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtReplaceFileName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtReplaceFileName.Location = new System.Drawing.Point(112, 69);
+            this.txtReplaceFileName.Location = new System.Drawing.Point(117, 265);
             this.txtReplaceFileName.MaxLength = 200;
             this.txtReplaceFileName.Name = "txtReplaceFileName";
             this.txtReplaceFileName.Size = new System.Drawing.Size(463, 34);
             this.txtReplaceFileName.TabIndex = 1;
+            this.txtReplaceFileName.Visible = false;
             // 
             // txtNewFileName
             // 
             this.txtNewFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNewFileName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtNewFileName.Location = new System.Drawing.Point(112, 29);
+            this.txtNewFileName.Location = new System.Drawing.Point(146, 60);
             this.txtNewFileName.MaxLength = 200;
             this.txtNewFileName.Name = "txtNewFileName";
-            this.txtNewFileName.Size = new System.Drawing.Size(502, 34);
+            this.txtNewFileName.Size = new System.Drawing.Size(487, 34);
             this.txtNewFileName.TabIndex = 1;
             // 
             // rdoReplace
             // 
             this.rdoReplace.AutoSize = true;
             this.rdoReplace.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.rdoReplace.Location = new System.Drawing.Point(27, 80);
+            this.rdoReplace.Location = new System.Drawing.Point(32, 276);
             this.rdoReplace.Name = "rdoReplace";
             this.rdoReplace.Size = new System.Drawing.Size(81, 21);
             this.rdoReplace.TabIndex = 0;
             this.rdoReplace.TabStop = true;
             this.rdoReplace.Text = "Replace";
             this.rdoReplace.UseVisualStyleBackColor = true;
+            this.rdoReplace.Visible = false;
             this.rdoReplace.CheckedChanged += new System.EventHandler(this.rdoReplace_CheckedChanged_1);
             // 
             // rdoNew
             // 
             this.rdoNew.AutoSize = true;
             this.rdoNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.rdoNew.Location = new System.Drawing.Point(27, 40);
+            this.rdoNew.Location = new System.Drawing.Point(32, 236);
             this.rdoNew.Name = "rdoNew";
             this.rdoNew.Size = new System.Drawing.Size(56, 21);
             this.rdoNew.TabIndex = 0;
             this.rdoNew.TabStop = true;
             this.rdoNew.Text = "New";
             this.rdoNew.UseVisualStyleBackColor = true;
+            this.rdoNew.Visible = false;
             this.rdoNew.CheckedChanged += new System.EventHandler(this.rdoNew_CheckedChanged_1);
             // 
             // label3
@@ -310,6 +317,16 @@
             this.label3.Size = new System.Drawing.Size(137, 29);
             this.label3.TabIndex = 2;
             this.label3.Text = "Config Path";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(41, 67);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 20);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "File name";
             // 
             // frmMain
             // 
@@ -327,6 +344,7 @@
             this.tabConfigPath.ResumeLayout(false);
             this.tabConfigPath.PerformLayout();
             this.FtpTab.ResumeLayout(false);
+            this.FtpTab.PerformLayout();
             this.btnConfigFtp.ResumeLayout(false);
             this.btnConfigFtp.PerformLayout();
             this.ResumeLayout(false);
@@ -351,9 +369,10 @@
         private System.Windows.Forms.GroupBox btnConfigFtp;
         private System.Windows.Forms.Button btnOpenConfig;
         private System.Windows.Forms.TextBox txtReplaceFileName;
+        private MetroFramework.Controls.MetroButton btnSaveTabFtp;
         private System.Windows.Forms.TextBox txtNewFileName;
         private System.Windows.Forms.RadioButton rdoReplace;
         private System.Windows.Forms.RadioButton rdoNew;
-        private MetroFramework.Controls.MetroButton btnSaveTabFtp;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -10,48 +10,39 @@ namespace BioLinkTaskSchedule.Forms
     {
         CommandHelper command = new CommandHelper();
 
-        protected int _fileNameType;
-        protected string _ftpFileName;
-
-        public popFtpConfig(int fileNameType, string ftpFileName)
+        public popFtpConfig()
         {
             InitializeComponent();
-            _fileNameType = fileNameType;
-            _ftpFileName = ftpFileName;
             BindTextBox();
         }
 
         public void BindTextBox()
         {
-            //string sourceUri = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindText.txt");
-            string directory = Directory.GetCurrentDirectory() + "\\TextFile";
-            string logFileName = directory + "\\bindText.txt";
+            string logFileName = @"C:\BioLink\FtpConfig.txt";
 
             FileInfo fi = new FileInfo(logFileName);
-
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
 
             if (File.Exists(fi.ToString()))
             {
                 string configText = File.ReadLines(logFileName).First();
+                if (!String.IsNullOrEmpty(configText))
+                {
+                    string[] str = configText.Split('|');
+                    txtSource.Text = str[0];
+                    txtServer.Text = str[1];
+                    txtPort.Text = str[2];
+                    txtFtpPath.Text = str[3];
+                    txtUserName.Text = str[4];
+                    txtPassword.Text = str[5];
+                }
 
-                string[] str = configText.Split('|');
-                txtSource.Text = str[0];
-                txtServer.Text = str[1];
-                txtPort.Text = str[2];
-                txtFtpPath.Text = str[3];
-                txtUserName.Text = str[4];
-                txtPassword.Text = str[5];
             }
-            
+
         }
 
         private void btnBrows_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, ValidateNames = true, Filter = "All files|*.*" })
+            using (OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, ValidateNames = true, Filter = "txt files (*.txt)|*.txt" })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -90,7 +81,7 @@ namespace BioLinkTaskSchedule.Forms
                 var port = txtPort.Text;
                 var userName = txtUserName.Text;
                 var passWord = txtPassword.Text;
-                string textWrite = $"{source}|{server}|{ftpPath}|{port}|{userName}|{passWord}|{_fileNameType}|{_ftpFileName}";
+                string textWrite = $"{source}|{server}|{port}|{ftpPath}|{userName}|{passWord}";
 
                 FileInfo fi = new FileInfo(startupPath);
                 fi.Delete();
@@ -101,11 +92,10 @@ namespace BioLinkTaskSchedule.Forms
                         sw.WriteLine(textWrite);
                     }
                 }
-                
+
                 DialogResult result = MessageBox.Show("Config FTP Success", "Information", buttons, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
                 {
-                    command.WriteTextMapModel(txtSource.Text, txtServer.Text, txtPort.Text, txtFtpPath.Text, txtUserName.Text, txtPassword.Text);
                     this.Hide();
                 }
             }

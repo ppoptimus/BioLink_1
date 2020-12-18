@@ -16,23 +16,40 @@ namespace TaskFtpUpload
         public static void GetConfig()
         {
             string sourceUri = @"C:\BioLink\FtpConfig.txt";
-            string configText = File.ReadLines(sourceUri).First();
-
-            string[] str = configText.Split('|');
-            var Source = str[0];
-            var Server = str[1];
-            var FtpPath = str[2];
-            var Port = str[3];
-            var UserName = str[4];
-            var Password = str[5];
-            var fileNameType = str[6];
-            var ftpFileName = str[7];
-
-            string result = FtpUpload(Source, Server, FtpPath, Port, UserName, Password, fileNameType, ftpFileName);
-            if (!String.IsNullOrEmpty(result))
+            if (File.Exists(sourceUri))
             {
-                Console.WriteLine(result);
-                //Console.Read();
+                string configText = File.ReadLines(sourceUri).First();
+
+                if (!String.IsNullOrEmpty(configText))
+                {
+                    string[] str = configText.Split('|');
+                    var Source = str[0];
+                    var Server = str[1];
+                    var Port = str[2];
+                    var FtpPath = str[3];
+                    var UserName = str[4];
+                    var Password = str[5];
+                    var fileNameType = FileNameType();
+                    var ftpFileName = FtpFileName();
+
+                    string result = FtpUpload(Source, Server, FtpPath, Port, UserName, Password, fileNameType, ftpFileName);
+                    if (!String.IsNullOrEmpty(result))
+                    {
+                        Console.WriteLine(result);
+                        //Console.Read();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Source file have no content!");
+                    Console.Read();
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine("Source file not found!");
+                Console.Read();
             }
         }
 
@@ -40,10 +57,23 @@ namespace TaskFtpUpload
         {
             var result = "";
             var host = "";
-            var ftpType = (fileNameType == "1") ? "New" : "Replace";
+            var ftpType = "";
+            if (fileNameType == "1")
+            {
+                ftpType = "New";
+            }
+            else if (fileNameType == "1")
+            {
+                ftpType = "Replace";
+            }
+            else
+            {
+                ftpType = "UnDefind";
+            }
+
             FileInfo fi = new FileInfo(sourceFile);
 
-            if(fileNameType == "1" || fileNameType == "2")
+            if (fileNameType == "1" || fileNameType == "2")
             {
                 host = "ftp://" + serverPath + ":" + port + "/" + folderPath + "/" + ftpFileName + fi.Extension;
             }
@@ -80,17 +110,16 @@ namespace TaskFtpUpload
             catch (Exception ex)
             {
                 result = ex.Message;
-                WriteLog("FtpUpload", sourceFile, serverPath, port, folderPath, userName, ex.Message, ftpType, ftpFileName + fi.Extension);
+                WriteLog("FtpUpload", sourceFile, serverPath, port, folderPath, userName, ex.Message, ftpType, ftpFileName);
             }
-
 
             return result;
         }
     
         public static void WriteLog(string functionName, string sourceFile, string serverPath, string port, string folderPath, string userName, string logMessage, string ftpType, string ftpUploadName)
         {
-            string directory = Directory.GetCurrentDirectory() + "\\logs";
-            string logFileName = directory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            string directory = @"C:\BioLink\Logs";
+            string logFileName = directory + "\\ftp_upload_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
 
             try
             {
@@ -107,7 +136,6 @@ namespace TaskFtpUpload
                         sw.WriteLine($"From source file : {sourceFile}");
                         sw.WriteLine($"Upload to Server : {serverPath}:{port}/{folderPath}");
                         sw.WriteLine($"User upload : {userName}");
-                        sw.WriteLine($"Ftp type : {ftpType}");
                         sw.WriteLine($"Ftp file name  : {ftpUploadName}");
                         sw.WriteLine($"Create datetime : {DateTime.Now}");
                         sw.WriteLine($"Message : {logMessage}");
@@ -122,7 +150,6 @@ namespace TaskFtpUpload
                         sw.WriteLine($"From source file : {sourceFile}");
                         sw.WriteLine($"Upload to Server : {serverPath}:{port}/{folderPath}");
                         sw.WriteLine($"User upload : {userName}");
-                        sw.WriteLine($"Ftp type : {ftpType}");
                         sw.WriteLine($"Ftp file name  : {ftpUploadName}");
                         sw.WriteLine($"Create datetime : {DateTime.Now}");
                         sw.WriteLine($"Message : {logMessage}");
@@ -137,6 +164,42 @@ namespace TaskFtpUpload
             }
 
         }
-    
+
+        public static string FileNameType()
+        {
+            string reusult = String.Empty;
+            string logFileName = @"C:\BioLink\bindTabFtpConfig.txt";
+            FileInfo fi = new FileInfo(logFileName);
+            if (File.Exists(fi.ToString()))
+            {
+                string configText = File.ReadLines(logFileName).First();
+                if (!string.IsNullOrEmpty(configText))
+                {
+                    string[] str = configText.Split('|');
+                    reusult = str[0];
+                }
+
+            }
+
+            return reusult;
+        }
+
+        public static string FtpFileName()
+        {
+            string reusult = String.Empty;
+            string logFileName = @"C:\BioLink\bindTabFtpConfig.txt";
+            FileInfo fi = new FileInfo(logFileName);
+            if (File.Exists(fi.ToString()))
+            {
+                string configText = File.ReadLines(logFileName).First();
+                if (!string.IsNullOrEmpty(configText))
+                {
+                    string[] str = configText.Split('|');
+                    reusult = str[1];
+                }
+            }
+
+            return reusult;
+        }
     }
 }

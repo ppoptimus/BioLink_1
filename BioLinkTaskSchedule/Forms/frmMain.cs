@@ -18,6 +18,7 @@ namespace BioLinkTaskSchedule.Forms
         {
             InitializeComponent();
             lblCurrentPath.Text = CuurentPath();
+            rdoNew.Checked = true;
             BindTextBox();
         }
 
@@ -142,17 +143,12 @@ namespace BioLinkTaskSchedule.Forms
 
         private void btnOpenConfig_Click(object sender, EventArgs e)
         {
-            if(!String.IsNullOrEmpty(txtNewFileName.Text) || !String.IsNullOrEmpty(txtReplaceFileName.Text))
+            if (!String.IsNullOrEmpty(txtNewFileName.Text) || !String.IsNullOrEmpty(txtReplaceFileName.Text))
             {
-                if(rdoNew.Checked == true) { fileNameType = 1; }
-                else if (rdoReplace.Checked == true) { fileNameType = 2; }
-                else { fileNameType = 0; }
-                ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
-
-                var popFtp = new popFtpConfig(fileNameType, ftpFileName);
+                var popFtp = new popFtpConfig();
                 popFtp.ShowDialog();
             }
-            
+
         }
 
         private void btnSaveTabFtp_Click(object sender, EventArgs e)
@@ -161,15 +157,9 @@ namespace BioLinkTaskSchedule.Forms
             {
                 ftpFileName = (!String.IsNullOrEmpty(txtNewFileName.Text)) ? txtNewFileName.Text : txtReplaceFileName.Text;
                 string textWrite = $"{fileTypeChecked}|{ftpFileName}";
-                //var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "bindTabFtpConfig.txt");
 
-                string directory = Directory.GetCurrentDirectory() + "\\TextFile";
-                string logFileName = directory + "\\bindTabFtpConfig.txt";
+                string logFileName = @"C:\BioLink\bindTabFtpConfig.txt";
                 FileInfo fi = new FileInfo(logFileName);
-                if (!Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                }
 
                 fi.Delete();
                 if (!File.Exists(fi.ToString()))
@@ -185,37 +175,33 @@ namespace BioLinkTaskSchedule.Forms
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
         public void BindTextBox()
         {
-            string directory = Directory.GetCurrentDirectory() + "\\TextFile";
-            string logFileName = directory + "\\bindTabFtpConfig.txt";
+            string logFileName = @"C:\BioLink\bindTabFtpConfig.txt";
             FileInfo fi = new FileInfo(logFileName);
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
+
             if (File.Exists(fi.ToString()))
             {
                 string configText = File.ReadLines(logFileName).First();
 
                 string[] str = configText.Split('|');
-                if(str[0] == "1")
+                if (str[0] == "1")
                 {
-                    rdoNew.Checked = true;
+                    //rdoNew.Checked = true;
                     txtNewFileName.Text = str[1];
                 }
                 else if (str[0] == "2")
                 {
-                    rdoReplace.Checked = true;
+                    //rdoReplace.Checked = true;
                     txtReplaceFileName.Text = str[1];
                 }
                 else
                 {
-                    rdoReplace.Checked = false;
-                    rdoNew.Checked = false;
+                    //rdoReplace.Checked = false;
+                    //rdoNew.Checked = false;
                 }
 
             }
