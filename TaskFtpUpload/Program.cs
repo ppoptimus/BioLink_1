@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -25,7 +24,6 @@ namespace TaskFtpUpload
                 {
                     string[] str = configText.Split('|');
                     var Source = str[0];
-                    //var Source = SourceFile();
                     var Server = str[1];
                     var Port = str[2];
                     var FtpPath = str[3];
@@ -202,24 +200,6 @@ namespace TaskFtpUpload
             }
 
             return reusult;
-        }
-
-        public static string SourceFile()
-        {
-            string result = "Unknown";
-            string directory = @"C:\BioX\Export";
-            var file = new DirectoryInfo(directory).GetFiles("*.txt*");
-            DateTime lastUpdate = DateTime.MinValue;
-
-            foreach (FileInfo item in file)
-            {
-                if(item.LastWriteTime > lastUpdate)
-                {
-                    lastUpdate = item.LastWriteTime;
-                    result = directory + "\\" + item.Name;
-                }
-            }
-            return result;
         }
     }
 }
