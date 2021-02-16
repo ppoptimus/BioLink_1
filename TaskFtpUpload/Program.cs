@@ -33,7 +33,7 @@ namespace TaskFtpUpload
                     var fileNameType = FileNameType();
                     var ftpFileName = FtpFileName();
 
-                    string result = FtpUpload(Source, Server, FtpPath, Port, UserName, Password, fileNameType, ftpFileName);
+                    string result = (Source == "Unknown")? String.Empty:FtpUpload(Source, Server, FtpPath, Port, UserName, Password, fileNameType, ftpFileName);
                     if (!String.IsNullOrEmpty(result))
                     {
                         Console.WriteLine(result);
@@ -107,6 +107,7 @@ namespace TaskFtpUpload
                     result = response.StatusDescription;
                 }
                 WriteLog("FtpUpload", sourceFile, serverPath, port, folderPath, userName, "Success", ftpType, ftpFileName + fi.Extension);
+                RemoveLastFile(sourceFile);
             }
             catch (Exception ex)
             {
@@ -207,7 +208,7 @@ namespace TaskFtpUpload
         {
             string result = "Unknown";
             string directory = @"C:\BioX\Export";
-            var file = new DirectoryInfo(directory).GetFiles("*.txt*");
+            var file = new DirectoryInfo(directory).GetFiles("*.txt*").OrderByDescending(p => p.LastWriteTime);
             DateTime lastUpdate = DateTime.MinValue;
 
             foreach (FileInfo item in file)
@@ -219,6 +220,28 @@ namespace TaskFtpUpload
                 }
             }
             return result;
+        }
+
+        public static void RemoveLastFile(string sourceFile)
+        {
+            string directory = @"C:\BioLink\Logs\BackupRemovedFile";
+            string filename = Path.ChangeExtension(Path.GetFileName(sourceFile), null);
+            string destinationFile = @"C:\BioLink\Logs\BackupRemovedFile\" + filename +"_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
+
+            try
+            {
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                File.Move(sourceFile, destinationFile);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }
