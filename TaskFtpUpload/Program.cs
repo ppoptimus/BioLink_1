@@ -82,8 +82,12 @@ namespace TaskFtpUpload
             {
                 host = "ftp://" + serverPath + ":" + port + "/" + folderPath + "/" + fi.Name;
             }
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host);
-            request.Method = WebRequestMethods.Ftp.UploadFile;
+            using (StreamWriter sw = File.AppendText(sourceFile))
+            {
+                sw.WriteLine("");
+            }
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host);
+            request.Method = WebRequestMethods.Ftp.AppendFile;
 
             request.Credentials = new NetworkCredential(userName, passWord);
             byte[] fileContents;
